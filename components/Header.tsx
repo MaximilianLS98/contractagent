@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import { Shield, Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { SignInButton, SignedIn, SignedOut, UserButton, SignUpButton } from '@clerk/nextjs';
 
 const navItems = [
 	{ href: '/', label: 'Hjem' },
@@ -42,9 +43,16 @@ export default function Header() {
 					))}
 				</nav>
 				<div className='flex items-center gap-4'>
-					<Button variant='outline' className='hidden md:flex'>
+					{/* <Button variant='outline' className='hidden md:flex'>
 						Logg inn
-					</Button>
+					</Button> */}
+					<SignedOut>
+						<SignInButton />
+						<SignUpButton />
+					</SignedOut>
+					<SignedIn>
+						<UserButton />
+					</SignedIn>
 					<Button className='hidden md:flex'>Kom i gang</Button>
 					<Sheet open={isOpen} onOpenChange={setIsOpen}>
 						<SheetTrigger asChild>
@@ -68,9 +76,10 @@ export default function Header() {
 										{item.label}
 									</Link>
 								))}
-								<Button variant='outline' className='w-full'>
+								{/* <Button variant='outline' className='w-full'>
 									Logg inn
-								</Button>
+								</Button> */}
+								<SignInButton />
 								<Button className='w-full'>Kom i gang</Button>
 							</nav>
 						</SheetContent>

@@ -42,9 +42,11 @@ export default function Home() {
 									</p>
 								</div>
 								<div className='flex flex-col gap-2 min-[400px]:flex-row'>
+                  <Link href='/livedemo'>
 									<Button size='lg' className='bg-primary hover:bg-primary/90'>
 										Be om en live demo <ArrowRight className='ml-2 h-4 w-4' />
 									</Button>
+                  </Link>
                   <Link href='/upload'>
 									<Button size='lg' variant='outline'>
 										Se demo

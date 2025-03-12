@@ -1,0 +1,134 @@
+{
+	"options": {
+		"method": "get",
+		"path": "/threads/thread_kpsGUC9jwDiMrf8EQR3Tm1Pf/messages",
+		"query": {},
+		"headers": { "OpenAI-Beta": "assistants=v2" }
+	},
+	"response": { "size": 0, "timeout": 0 },
+	"body": {
+		"object": "list",
+		"data": [
+			{
+				"id": "msg_sbsGvoKuLOq9cEvXzbCieRhH",
+				"object": "thread.message",
+				"created_at": 1741788564,
+				"assistant_id": "asst_jPNCBUY5JhOpyi2sCCBNoRsi",
+				"thread_id": "thread_kpsGUC9jwDiMrf8EQR3Tm1Pf",
+				"run_id": "run_eL4xmTNEh9p7zMSnxM8VMXah",
+				"role": "assistant",
+				"content": [
+					{
+						"type": "text",
+						"text": {
+							"value": "**Kontrakttype:**\nDette er en arbeidsavtale (arbeidskontrakt) som regulerer ansettelsesforholdet mellom arbeidsgiver (WAYS AS) og arbeidstaker (Maximilian Skjønhaug).\n\n**Analyser for juridiske risikoer:**\n\n1. **Uklare eller vage vilkår:**\n   - Det kan være behov for mer spesifikasjon av arbeidsoppgavene under punkt 4, \"Ansatt som (arb. oppgaver/stilling/tittel/arbeidskategori)\". Uklare ansvarsområder kan føre til misforståelser om forventningene.\n\n2. **Ubalanserte forpliktelser:**\n   - Kontrakten ser ut til å være rimelig balansert, men det er ikke spesifisert om det finnes spesielle krav til arbeidstakerens plikter utover det som er vanlig. Enhver ubalanse kan skape problemer i forholdet mellom partene.\n\n3. **Lovlighet og samsvar:**\n   - Kontrakten ser ut til å overholde arbeidsmiljøloven og ferieloven. Imidlertid bør det sjekkes om paragraf 15-6(4) er tilstrekkelig oppfylt for prøvetidsbestemmelsene, da det ikke er nevnt noe om forlengelse av prøvetid.\n\n4. **Ansvar og risiko:**\n   - Det er ingen spesifikke klausuler som synes å pålegge uforholdsmessig ansvar på arbeidstaker, men det kan være nyttig å spesifisere hva som skjer i tilfelle av mislighold eller andre brudd på kontrakten.\n\n5. **Oppsigelse og bruddskonsekvenser:**\n   - Oppsigelsesfrister er nevnt, men det bør vurderes å inkludere mer detaljerte konsekvenser knyttet til brudd på kontrakten fra begge parters side.\n\n6. **Tvisteløsning:**\n   - Kontrakten mangler tydelige bestemmelser om tvisteløsning og jurisdiksjon, noe som kan føre til usikkerhet i tilfelle en tvist oppstår. Det bør vurderes å inkludere slike klausuler.\n\n**Sammendrag av funn:**\n- Kontrakten er en arbeidsavtale.\n- Kritiske risikoer inkluderer vage vilkår angående arbeidsoppgaver, mulige ubalanserte forpliktelser, manglende spesifikasjoner om oppsigelse, og manglende tvisteløsningsklausuler.\n- Anbefalte områder for juridisk avklaring eller revisjon inkluderer spesifikasjon av arbeidsoppgaver, klare oppsigelses­ og bruddskonsekvenser, samt inkludering av en tvisteløsningsprosess.\n- Usual clause: Det finnes ingen åpenbare usunne klausuler, men det er viktig at kontrakten oppdateres med spesifikasjoner for å unngå potensielle fremtidige konflikter.",
+							"annotations": []
+						}
+					}
+				],
+				"attachments": [],
+				"metadata": {}
+			},
+			{
+				"id": "msg_7woS0Lp3mDVTfWsCpdiCCZzf",
+				"object": "thread.message",
+				"created_at": 1741788560,
+				"assistant_id": null,
+				"thread_id": "thread_kpsGUC9jwDiMrf8EQR3Tm1Pf",
+				"run_id": null,
+				"role": "user",
+				"content": [
+					{
+						"type": "text",
+						"text": {
+							"value": "\n\nArbeidsavtale\nBeholdesavarbeidsgiver–kopitilarbeidstaker\n1.Firma\nNavnDagligleder\nWAYSAS(832175692)KnutMichaelKnutsenHaugland\nAdresse\nRådhusgata5B,0151Oslo\n2.Ansatt\nNavn\nMaximilian Skjønhaug\nAdresse\nPilestredet29a,0166Oslo\nMaximilian Skjønhaug\n3.Arbeidsplass(jf.arbeidsmiljøloven§14-6(1)b)\nAdresse\nRådhusgata5B,0151Oslo\n4.Ansattsom(arb.oppgaver/stilling/tittel/arbeidskategori)\nSystemutvikler\n5.Tariffavtale/verneombud\nFølgendetariffavtale(r)gjelder\n     \nTariffparterVerneombud\n          \nSjekkallepunkternedenformedtariffavtalen\n6.Ansettelsesforholdetsvarighetogarbeidstid\nAnsattfraEventuelttil\n23.09.2023     \nUkentligarbeidstid(lengde/plassering)Dagligarbeidstid(lengde/plassering)\n37,5t     \nEventuellsærligarbeidstidsordningPauser(lengde)\n30min\nArbeidstakersoppsigelsesfristArbeidsgiversoppsigelsesfrist\nTremånedertremåneder\nFerietid,fastsettesihenholdtilferielovensbestemmelser\n     5uker\n7.Eventuellprøvetid\nPrøvetidenslengdeOppsigelsesfristiprøvetiden\nEv.forlengelseavprøvetid(jf.arbeidsmiljøloven§15-6(4))\n     \n8.Lønn\nLønnpermånedUtbetalingsmåteUtbetalingstidspunkt\n55000,-Bank     D.25.etterskuddsvis\nOvertidstillegg(min.40%)Helge-/nattilleggAndretillegg\n250300          \nGodtgjørelse/diett\n     \nFeriepengerkommeritilleggtillønn,jf.ferieloven\n     12%\n9.Andreopplysninger\nTilleggpåansattgoder,beskrevetipersonalhåndbok.2%pensjon.Oppjusteringijanuar,medutbetalingavdifferansenpå\n5000permånedforrestenav2023.\n10.Underskrifter\nDatoUnderskriftarbeidsgiverUnderskriftarbeidstaker\n23.09.2023          \n563-B(Godkj.07-2006)Elektroniskutgave\nMaximilian Skjønhaug\nKnut Michael Haugland\nDette dokumentet er signert ved hjelp av GetAccept Digital Signature Technology.\nFingerprint: 4fb497974a151a783ca4f9489e83a11ee7c61d9ecc89b59d7252b432f14627e66986ebf3836b4ff9f5bdee3db5e8b3113927f8c29abc0b36db45ceb5b2f154d3\n\nDette dokumentet er signert ved hjelp av GetAccept Digital Signature Technology.\nFingerprint: 4fb497974a151a783ca4f9489e83a11ee7c61d9ecc89b59d7252b432f14627e66986ebf3836b4ff9f5bdee3db5e8b3113927f8c29abc0b36db45ceb5b2f154d3\n\nSignatur sertifikat\nDokumentnavn:\n23.09.2023-Maximilian Skjønhaug\nUnikt dokument ld:\nc97951c6-65f1-452f-ad55-50ee1d3cf5af\nDokument fingeravtrykk:\n4fb497974a151a783ca4f9489e83a11ee7c61d9ecc89b59d7252b432f14627e66986ebf3836b4ff9f5bdee\n3db5e8b3113927f8c29abc0b36db45ceb5b2f154d3\nUndertegnede\nMaximilian Skjønhaug\nE-post:maximilian.skjonhaug@ways.no\nEnhet:Chrome 118.0.0.0 on Unknown macOS 10.15.7\n(desktop)\nIP adresse:89.10.127.218\nTillitsfullt tidsstempel:\n2023-11-13 13:39:25 UTC\nMaximilian Skjønhaug\nKnut Michael Haugland\nCEO\nWAYS (920915019)\nE-post:knut@ways.no\nEnhet:Chrome 119.0.0.0 on Unknown macOS 10.15.7\n(desktop)\nIP adresse:\nBekreftet med logg inn\nTillitsfullt tidsstempel:\n2023-11-13 13:28:54 UTC\nDette dokumentet ble gjennomført av alle parter på:\n2023-11-13 13:39:25 UTC\nDette dokumentet er signert ved hjelp av GetAccept Digital Signature Technology.\nDette signaturbeviset gir alle signaturer knyttet til dette dokumentet og revisjonsloggen.\n\nRevisjonslogg\nTillitsfullt tidsstempelHendelse med innsamlede revisjonsdato\n2023-11-13 13:39:25 UTCDokument ble signert av Maximilian Skjønhaug\n(maximilian.skjonhaug@ways.no)\nEnhet: Chrome 118.0.0.0 on Unknown macOS 10.15.7 (desktop)\nIP adresse: 89.10.127.218 - IP Lokasjon: Oslo, Norway\n2023-11-13 13:39:20 UTCDokument ble godkjent via håndskrevet signatur av Maximilian Skjønhaug\n(maximilian.skjonhaug@ways.no)\nEnhet: Chrome 118.0.0.0 on Unknown macOS 10.15.7 (desktop)\nIP adresse: 89.10.127.218 - IP Lokasjon: Oslo, Norway\n2023-11-13 13:39:02 UTCDokument ble åpnet av Maximilian Skjønhaug (maximilian.skjonhaug@ways.no)\nEnhet: Chrome 118.0.0.0 on Unknown macOS 10.15.7 (desktop)\nIP adresse: 89.10.127.218 - IP Lokasjon: Oslo, Norway\n2023-11-13 13:28:59 UTCDokument ble sendt til Maximilian Skjønhaug (maximilian.skjonhaug@ways.no)\nEnhet: Chrome 119.0.0.0 on Unknown macOS 10.15.7 (desktop)\nIP adresse: 178.232.20.156 - IP Lokasjon: Oslo, Norway\n2023-11-13 13:28:56 UTCDokument ble forseglet av Knut Michael Haugland (knut@ways.no)\nEnhet: Chrome 119.0.0.0 on Unknown macOS 10.15.7 (desktop)\nIP adresse: 178.232.20.156 - IP Lokasjon: Oslo, Norway\n2023-11-13 13:28:54 UTCDokument ble signert av Knut Michael Haugland (knut@ways.no)\nEnhet: Chrome 119.0.0.0 on Unknown macOS 10.15.7 (desktop)\n2023-11-13 13:28:54 UTCDokument ble godkjent via håndskrevet signatur av Knut Michael Haugland\n(knut@ways.no)\nEnhet: Chrome 119.0.0.0 on Unknown macOS 10.15.7 (desktop)\n2023-11-13 13:26:52 UTCDokument ble opprettet av Knut Michael Haugland (knut@ways.no)\nEnhet: Chrome 119.0.0.0 on Unknown macOS 10.15.7 (desktop)\nIP adresse: 178.232.20.156 - IP Lokasjon: Oslo, Norway\nDette dokumentet er signert ved hjelp av GetAccept Digital Signature Technology.\nDette signaturbeviset gir alle signaturer knyttet til dette dokumentet og revisjonsloggen.",
+							"annotations": []
+						}
+					}
+				],
+				"attachments": [],
+				"metadata": {}
+			},
+			{
+				"id": "msg_9CNUQwPJ2p58M22v0E0OyaGV",
+				"object": "thread.message",
+				"created_at": 1741788560,
+				"assistant_id": null,
+				"thread_id": "thread_kpsGUC9jwDiMrf8EQR3Tm1Pf",
+				"run_id": null,
+				"role": "user",
+				"content": [
+					{
+						"type": "text",
+						"text": { "value": "Please analyse this contract.", "annotations": [] }
+					}
+				],
+				"attachments": [],
+				"metadata": {}
+			}
+		],
+		"first_id": "msg_sbsGvoKuLOq9cEvXzbCieRhH",
+		"last_id": "msg_9CNUQwPJ2p58M22v0E0OyaGV",
+		"has_more": false
+	},
+	"data": [
+		{
+			"id": "msg_sbsGvoKuLOq9cEvXzbCieRhH",
+			"object": "thread.message",
+			"created_at": 1741788564,
+			"assistant_id": "asst_jPNCBUY5JhOpyi2sCCBNoRsi",
+			"thread_id": "thread_kpsGUC9jwDiMrf8EQR3Tm1Pf",
+			"run_id": "run_eL4xmTNEh9p7zMSnxM8VMXah",
+			"role": "assistant",
+			"content": [
+				{
+					"type": "text",
+					"text": {
+						"value": "**Kontrakttype:**\nDette er en arbeidsavtale (arbeidskontrakt) som regulerer ansettelsesforholdet mellom arbeidsgiver (WAYS AS) og arbeidstaker (Maximilian Skjønhaug).\n\n**Analyser for juridiske risikoer:**\n\n1. **Uklare eller vage vilkår:**\n   - Det kan være behov for mer spesifikasjon av arbeidsoppgavene under punkt 4, \"Ansatt som (arb. oppgaver/stilling/tittel/arbeidskategori)\". Uklare ansvarsområder kan føre til misforståelser om forventningene.\n\n2. **Ubalanserte forpliktelser:**\n   - Kontrakten ser ut til å være rimelig balansert, men det er ikke spesifisert om det finnes spesielle krav til arbeidstakerens plikter utover det som er vanlig. Enhver ubalanse kan skape problemer i forholdet mellom partene.\n\n3. **Lovlighet og samsvar:**\n   - Kontrakten ser ut til å overholde arbeidsmiljøloven og ferieloven. Imidlertid bør det sjekkes om paragraf 15-6(4) er tilstrekkelig oppfylt for prøvetidsbestemmelsene, da det ikke er nevnt noe om forlengelse av prøvetid.\n\n4. **Ansvar og risiko:**\n   - Det er ingen spesifikke klausuler som synes å pålegge uforholdsmessig ansvar på arbeidstaker, men det kan være nyttig å spesifisere hva som skjer i tilfelle av mislighold eller andre brudd på kontrakten.\n\n5. **Oppsigelse og bruddskonsekvenser:**\n   - Oppsigelsesfrister er nevnt, men det bør vurderes å inkludere mer detaljerte konsekvenser knyttet til brudd på kontrakten fra begge parters side.\n\n6. **Tvisteløsning:**\n   - Kontrakten mangler tydelige bestemmelser om tvisteløsning og jurisdiksjon, noe som kan føre til usikkerhet i tilfelle en tvist oppstår. Det bør vurderes å inkludere slike klausuler.\n\n**Sammendrag av funn:**\n- Kontrakten er en arbeidsavtale.\n- Kritiske risikoer inkluderer vage vilkår angående arbeidsoppgaver, mulige ubalanserte forpliktelser, manglende spesifikasjoner om oppsigelse, og manglende tvisteløsningsklausuler.\n- Anbefalte områder for juridisk avklaring eller revisjon inkluderer spesifikasjon av arbeidsoppgaver, klare oppsigelses­ og bruddskonsekvenser, samt inkludering av en tvisteløsningsprosess.\n- Usual clause: Det finnes ingen åpenbare usunne klausuler, men det er viktig at kontrakten oppdateres med spesifikasjoner for å unngå potensielle fremtidige konflikter.",
+						"annotations": []
+					}
+				}
+			],
+			"attachments": [],
+			"metadata": {}
+		},
+		{
+			"id": "msg_7woS0Lp3mDVTfWsCpdiCCZzf",
+			"object": "thread.message",
+			"created_at": 1741788560,
+			"assistant_id": null,
+			"thread_id": "thread_kpsGUC9jwDiMrf8EQR3Tm1Pf",
+			"run_id": null,
+			"role": "user",
+			"content": [
+				{
+					"type": "text",
+					"text": {
+						"value": "\n\nArbeidsavtale\nBeholdesavarbeidsgiver–kopitilarbeidstaker\n1.Firma\nNavnDagligleder\nWAYSAS(832175692)KnutMichaelKnutsenHaugland\nAdresse\nRådhusgata5B,0151Oslo\n2.Ansatt\nNavn\nMaximilian Skjønhaug\nAdresse\nPilestredet29a,0166Oslo\nMaximilian Skjønhaug\n3.Arbeidsplass(jf.arbeidsmiljøloven§14-6(1)b)\nAdresse\nRådhusgata5B,0151Oslo\n4.Ansattsom(arb.oppgaver/stilling/tittel/arbeidskategori)\nSystemutvikler\n5.Tariffavtale/verneombud\nFølgendetariffavtale(r)gjelder\n     \nTariffparterVerneombud\n          \nSjekkallepunkternedenformedtariffavtalen\n6.Ansettelsesforholdetsvarighetogarbeidstid\nAnsattfraEventuelttil\n23.09.2023     \nUkentligarbeidstid(lengde/plassering)Dagligarbeidstid(lengde/plassering)\n37,5t     \nEventuellsærligarbeidstidsordningPauser(lengde)\n30min\nArbeidstakersoppsigelsesfristArbeidsgiversoppsigelsesfrist\nTremånedertremåneder\nFerietid,fastsettesihenholdtilferielovensbestemmelser\n     5uker\n7.Eventuellprøvetid\nPrøvetidenslengdeOppsigelsesfristiprøvetiden\nEv.forlengelseavprøvetid(jf.arbeidsmiljøloven§15-6(4))\n     \n8.Lønn\nLønnpermånedUtbetalingsmåteUtbetalingstidspunkt\n55000,-Bank     D.25.etterskuddsvis\nOvertidstillegg(min.40%)Helge-/nattilleggAndretillegg\n250300          \nGodtgjørelse/diett\n     \nFeriepengerkommeritilleggtillønn,jf.ferieloven\n     12%\n9.Andreopplysninger\nTilleggpåansattgoder,beskrevetipersonalhåndbok.2%pensjon.Oppjusteringijanuar,medutbetalingavdifferansenpå\n5000permånedforrestenav2023.\n10.Underskrifter\nDatoUnderskriftarbeidsgiverUnderskriftarbeidstaker\n23.09.2023          \n563-B(Godkj.07-2006)Elektroniskutgave\nMaximilian Skjønhaug\nKnut Michael Haugland\nDette dokumentet er signert ved hjelp av GetAccept Digital Signature Technology.\nFingerprint: 4fb497974a151a783ca4f9489e83a11ee7c61d9ecc89b59d7252b432f14627e66986ebf3836b4ff9f5bdee3db5e8b3113927f8c29abc0b36db45ceb5b2f154d3\n\nDette dokumentet er signert ved hjelp av GetAccept Digital Signature Technology.\nFingerprint: 4fb497974a151a783ca4f9489e83a11ee7c61d9ecc89b59d7252b432f14627e66986ebf3836b4ff9f5bdee3db5e8b3113927f8c29abc0b36db45ceb5b2f154d3\n\nSignatur sertifikat\nDokumentnavn:\n23.09.2023-Maximilian Skjønhaug\nUnikt dokument ld:\nc97951c6-65f1-452f-ad55-50ee1d3cf5af\nDokument fingeravtrykk:\n4fb497974a151a783ca4f9489e83a11ee7c61d9ecc89b59d7252b432f14627e66986ebf3836b4ff9f5bdee\n3db5e8b3113927f8c29abc0b36db45ceb5b2f154d3\nUndertegnede\nMaximilian Skjønhaug\nE-post:maximilian.skjonhaug@ways.no\nEnhet:Chrome 118.0.0.0 on Unknown macOS 10.15.7\n(desktop)\nIP adresse:89.10.127.218\nTillitsfullt tidsstempel:\n2023-11-13 13:39:25 UTC\nMaximilian Skjønhaug\nKnut Michael Haugland\nCEO\nWAYS (920915019)\nE-post:knut@ways.no\nEnhet:Chrome 119.0.0.0 on Unknown macOS 10.15.7\n(desktop)\nIP adresse:\nBekreftet med logg inn\nTillitsfullt tidsstempel:\n2023-11-13 13:28:54 UTC\nDette dokumentet ble gjennomført av alle parter på:\n2023-11-13 13:39:25 UTC\nDette dokumentet er signert ved hjelp av GetAccept Digital Signature Technology.\nDette signaturbeviset gir alle signaturer knyttet til dette dokumentet og revisjonsloggen.\n\nRevisjonslogg\nTillitsfullt tidsstempelHendelse med innsamlede revisjonsdato\n2023-11-13 13:39:25 UTCDokument ble signert av Maximilian Skjønhaug\n(maximilian.skjonhaug@ways.no)\nEnhet: Chrome 118.0.0.0 on Unknown macOS 10.15.7 (desktop)\nIP adresse: 89.10.127.218 - IP Lokasjon: Oslo, Norway\n2023-11-13 13:39:20 UTCDokument ble godkjent via håndskrevet signatur av Maximilian Skjønhaug\n(maximilian.skjonhaug@ways.no)\nEnhet: Chrome 118.0.0.0 on Unknown macOS 10.15.7 (desktop)\nIP adresse: 89.10.127.218 - IP Lokasjon: Oslo, Norway\n2023-11-13 13:39:02 UTCDokument ble åpnet av Maximilian Skjønhaug (maximilian.skjonhaug@ways.no)\nEnhet: Chrome 118.0.0.0 on Unknown macOS 10.15.7 (desktop)\nIP adresse: 89.10.127.218 - IP Lokasjon: Oslo, Norway\n2023-11-13 13:28:59 UTCDokument ble sendt til Maximilian Skjønhaug (maximilian.skjonhaug@ways.no)\nEnhet: Chrome 119.0.0.0 on Unknown macOS 10.15.7 (desktop)\nIP adresse: 178.232.20.156 - IP Lokasjon: Oslo, Norway\n2023-11-13 13:28:56 UTCDokument ble forseglet av Knut Michael Haugland (knut@ways.no)\nEnhet: Chrome 119.0.0.0 on Unknown macOS 10.15.7 (desktop)\nIP adresse: 178.232.20.156 - IP Lokasjon: Oslo, Norway\n2023-11-13 13:28:54 UTCDokument ble signert av Knut Michael Haugland (knut@ways.no)\nEnhet: Chrome 119.0.0.0 on Unknown macOS 10.15.7 (desktop)\n2023-11-13 13:28:54 UTCDokument ble godkjent via håndskrevet signatur av Knut Michael Haugland\n(knut@ways.no)\nEnhet: Chrome 119.0.0.0 on Unknown macOS 10.15.7 (desktop)\n2023-11-13 13:26:52 UTCDokument ble opprettet av Knut Michael Haugland (knut@ways.no)\nEnhet: Chrome 119.0.0.0 on Unknown macOS 10.15.7 (desktop)\nIP adresse: 178.232.20.156 - IP Lokasjon: Oslo, Norway\nDette dokumentet er signert ved hjelp av GetAccept Digital Signature Technology.\nDette signaturbeviset gir alle signaturer knyttet til dette dokumentet og revisjonsloggen.",
+						"annotations": []
+					}
+				}
+			],
+			"attachments": [],
+			"metadata": {}
+		},
+		{
+			"id": "msg_9CNUQwPJ2p58M22v0E0OyaGV",
+			"object": "thread.message",
+			"created_at": 1741788560,
+			"assistant_id": null,
+			"thread_id": "thread_kpsGUC9jwDiMrf8EQR3Tm1Pf",
+			"run_id": null,
+			"role": "user",
+			"content": [
+				{
+					"type": "text",
+					"text": { "value": "Please analyse this contract.", "annotations": [] }
+				}
+			],
+			"attachments": [],
+			"metadata": {}
+		}
+	],
+	"has_more": false
+}
