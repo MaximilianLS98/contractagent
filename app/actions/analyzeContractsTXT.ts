@@ -4,8 +4,8 @@ import { OpenAI } from 'openai';
 import { writeFile, readFile } from 'fs/promises';
 import path from 'path';
 import { randomUUID } from 'crypto';
-// import pdfParse from 'pdf-parse';
-import pdf from 'pdf-parse/lib/pdf-parse';
+import pdfParse from 'pdf-parse';
+// import pdf from 'pdf-parse/lib/pdf-parse';
 import { unlink } from 'fs';
 
 
@@ -18,7 +18,7 @@ interface ExtractTextFromPDF {
 const extractTextFromPDF: ExtractTextFromPDF = async (filePath: string): Promise<string> => {
     try {
         const dataBuffer = await readFile(filePath);
-        const pdfData = await pdf(dataBuffer);
+        const pdfData = await pdfParse(dataBuffer);
         return pdfData.text;
     } catch (error) {
         if (error instanceof Error) {
