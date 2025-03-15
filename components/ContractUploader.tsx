@@ -42,7 +42,7 @@ export default function ContractUploader() {
 
 		// const response = await analyzeContract(formData);
 		const response = (await analyzeTXTContract(formData)) as ContractAnalysisResult;
-        console.log(`Response from analyzeTXTContract:`, JSON.stringify(response));
+        // console.log(`Response from analyzeTXTContract:`, JSON.stringify(response));
 		setResult(response);
 		setLoading(false);
 	};
