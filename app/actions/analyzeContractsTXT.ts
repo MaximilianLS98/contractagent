@@ -57,6 +57,7 @@ export async function analyzeTXTContract(formData:FormData) {
                 }
             ]
         });
+        console.log('Thread created in server action:', thread.id);
 
         if (!process.env.OPENAI_ASSISTANT_ID) {
             throw new Error('OPENAI_ASSISTANT_ID is not defined');
@@ -64,11 +65,13 @@ export async function analyzeTXTContract(formData:FormData) {
         const run = await openai.beta.threads.runs.create(thread.id, {
             assistant_id: process.env.OPENAI_ASSISTANT_ID,
         });
+        console.log('Run created in server action:', run.id);
 
         let runStatus;
         do {
 			await new Promise((resolve) => setTimeout(resolve, 2000));
 			runStatus = await openai.beta.threads.runs.retrieve(thread.id, run.id);
+            console.log(`Run status, fires every 2 seconds:`, JSON.stringify(runStatus));
 		} while (runStatus.status !== 'completed');
 
         const messages = await openai.beta.threads.messages.list(thread.id);
@@ -82,9 +85,9 @@ export async function analyzeTXTContract(formData:FormData) {
     catch (error) {
         console.error(error);
         return { data: null, error };
-    } finally {
-        await unlink(filePath, (err) => {
-            if (err) throw err;
-        });
+    // } finally {
+    //     await unlink(filePath, (err) => {
+    //         if (err) throw err;
+    //     });
     }
 }
