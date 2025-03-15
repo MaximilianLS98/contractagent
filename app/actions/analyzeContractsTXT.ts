@@ -11,15 +11,21 @@ import { unlink } from 'fs';
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
+// Doing this because pdf-parse is not maintained and the types are not up to date
 interface ExtractTextFromPDF {
     (filePath: string): Promise<string>;
+}
+
+// Take the interface from the pdf-parse and append pageData to the Result interface
+interface extendedResult extends pdfParse.Result {
+    pageData: PageData[];
 }
 
 const extractTextFromPDF: ExtractTextFromPDF = async (filePath: string): Promise<string> => {
     // console.log('Extracting text from PDF:', filePath);
     try {
         const dataBuffer = await readFile(filePath);
-        const pdfData = await pdfParse(dataBuffer);
+        const pdfData = await pdfParse(dataBuffer) as extendedResult;
         // console.log('PDF data:', pdfData);
         const joinedPageData = pdfData.pageData.map((page: PageData) => page).join('\n');
         // console.log('Joined page data:', joinedPageData);
