@@ -1,6 +1,6 @@
 import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
 
-const isProtectedRoute = createRouteMatcher(['/helloworld']);
+const isProtectedRoute = createRouteMatcher(['/livedemo']);
 
 export default clerkMiddleware(async (auth, req) => {
 	const { userId, redirectToSignIn } = await auth();
@@ -9,6 +9,9 @@ export default clerkMiddleware(async (auth, req) => {
 		// Add custom logic to run before redirecting
 		return redirectToSignIn();
 	}
+    if (isProtectedRoute(req)) {
+        console.log('User is authenticated to access protected route');
+    }
 });
 
 export const config = {
