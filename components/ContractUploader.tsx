@@ -8,6 +8,8 @@ import { Card, CardContent, CardHeader } from './ui/card';
 import DisclaimerModal from './DisclaimerModal';
 import { Button } from './ui/button';
 import { Spinner } from './ui/Spinner';
+import { Badge } from './ui/badge';
+import { AlertTriangle, CheckCircle, Info } from 'lucide-react';
 
 // Define types for response data
 interface ContractAnalysisResult {
@@ -23,6 +25,7 @@ export default function ContractUploader() {
 	const [loading, setLoading] = useState<boolean>(false);
 	const [thread, setThread] = useState<any | null>(null);
 	const [accepted, setAccepted] = useState<boolean>(false);
+	const [parsedResult, setParsedResult] = useState<any | null>(null);
 
 	const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		if (event.target.files && event.target.files.length > 0) {
@@ -42,9 +45,14 @@ export default function ContractUploader() {
 
 		// const response = await analyzeContract(formData);
 		const response = (await analyzeTXTContract(formData)) as ContractAnalysisResult;
-        // console.log(`Response from analyzeTXTContract:`, JSON.stringify(response));
+		// console.log(`Response from analyzeTXTContract:`, JSON.stringify(response));
 		setResult(response);
+		setParsedResult(JSON.parse(response.data?.content[0].text.value));
 		setLoading(false);
+		console.log(
+			`json response from analyzeTXTContract:`,
+			JSON.parse(response.data.content[0].text.value),
+		);
 	};
 
 	return (
@@ -58,7 +66,7 @@ export default function ContractUploader() {
 				<CardContent>
 					<input
 						type='file'
-                        accept='application/pdf'
+						accept='application/pdf'
 						onChange={handleFileChange}
 						className='block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 mb-4'
 					/>
@@ -93,7 +101,67 @@ export default function ContractUploader() {
 			{result && (
 				<div className='mt-4 p-4 bg-gray-100 rounded-lg'>
 					<h3 className='text-xl font-semibold mb-2'>Analysis Result:</h3>
-					<MarkdownRenderer markdown={result.data?.content[0].text.value} />
+					{/* <pre>{JSON.stringify(result, null, 4)}</pre> */}
+					{/* <pre>{JSON.stringify(parsedResult, null, 4)}</pre> */}
+					<h2 className='text-lg font-semibold mt-6'>Viktige klausuler</h2>
+					{parsedResult.critical_clauses.map((clause: string, index: number) => {
+						return (
+							<div className='my-4' key={`${index}critical`}>
+								<h3 className='font-semibold flex items-center'>
+									<AlertTriangle className='h-5 w-5 text-yellow-500 mr-2' />
+									Risiko {index + 1}
+								</h3>
+								<p>{clause}</p>
+								<Badge
+									variant='outline'
+									className='text-yellow-500 border-yellow-500'>
+									Seksjon 2
+								</Badge>
+							</div>
+							// <div key={index} className='bg-red-200 p-2 my-2 rounded-lg'>
+							//     <p>{clause}</p>
+							// </div>
+						);
+					})}
+					<h2 className='text-lg font-semibold mt-6'>Forslag til endringer</h2>
+					{parsedResult.suggestions.map((suggestion: string, index: number) => {
+						return (
+							<div className='my-4' key={`${index}suggestions`}>
+								<h3 className='font-semibold flex items-center'>
+									<CheckCircle className='h-5 w-5 text-green-500 mr-2' />
+									Anbefaling {index + 1}
+								</h3>
+								<p>{suggestion}</p>
+								<Badge
+									variant='outline'
+									className='text-green-500 border-green-500'>
+									Seksjon 3
+								</Badge>
+							</div>
+							// <div key={index} className='bg-yellow-200 p-2 my-2 rounded-lg'>
+							//     <p>{suggestion}</p>
+							// </div>
+						);
+					})}
+					<h2 className='text-lg font-semibold mt-6'>Uvanlige klausuler</h2>
+					{parsedResult.unusual_clauses.map((clause: string, index: number) => {
+						return (
+							<div className='my-4' key={`${index}unusual`}>
+								<h3 className='font-semibold flex items-center'>
+									<Info className='h-5 w-5 text-blue-500 mr-2' />
+									Uvanlig klausul {index + 1}
+								</h3>
+								<p>{clause}</p>
+								<Badge variant='outline' className='text-blue-500 border-blue-500'>
+									Seksjon 5
+								</Badge>
+							</div>
+							// <div key={index} className='bg-blue-200 p-2 my-2 rounded-lg'>
+							//     <p>{clause}</p>
+							// </div>
+						);
+					})}
+					{/* <MarkdownRenderer markdown={result.data?.content[0].text.value} /> */}
 				</div>
 			)}
 		</div>

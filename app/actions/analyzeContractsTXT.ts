@@ -87,7 +87,7 @@ export async function analyzeTXTContract(formData:FormData) {
 		} while (runStatus.status !== 'completed');
 
         const messages = await openai.beta.threads.messages.list(thread.id);
-        // console.log(`Messages for thread ${thread.id}:`, JSON.stringify(messages));
+        console.log(`Messages for thread ${thread.id}:`, JSON.stringify(messages));
 
         const responseObj = messages.data.filter((msg) => msg.role === 'assistant');
 
