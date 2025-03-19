@@ -18,7 +18,7 @@ import {
 	AccordionTrigger,
 } from '@/components/ui/accordion';
 
-export default function Home() {
+export default async function Home() {
 	return (
 		<div className='flex min-h-screen flex-col'>
 			<main className='flex-1'>
@@ -42,16 +42,19 @@ export default function Home() {
 									</p>
 								</div>
 								<div className='flex flex-col gap-2 min-[400px]:flex-row'>
-                  <Link href='/livedemo'>
-									<Button size='lg' className='bg-primary hover:bg-primary/90'>
-										Be om en live demo <ArrowRight className='ml-2 h-4 w-4' />
-									</Button>
-                  </Link>
-                  <Link href='/upload'>
-									<Button size='lg' variant='outline'>
-										Se demo
-									</Button>
-                  </Link>
+									<Link href='/livedemo'>
+										<Button
+											size='lg'
+											className='bg-primary hover:bg-primary/90'>
+											Analyser kontrakt{' '}
+											<ArrowRight className='ml-2 h-4 w-4' />
+										</Button>
+									</Link>
+									<Link href='/upload'>
+										<Button size='lg' variant='outline'>
+											Se demo
+										</Button>
+									</Link>
 									<Button size='lg' variant='secondary'>
 										Lær mer
 									</Button>
