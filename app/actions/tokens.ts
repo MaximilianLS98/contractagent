@@ -27,6 +27,6 @@ export async function setUpTokensForFirstTimeUser(clerk_user_id: string) {
     const { databases } = await createAdminClient();
     await databases.createDocument('legaledge', 'user_queries', clerk_user_id, {
         clerk_user_id: clerk_user_id,
-        tokens: START_TOKENS
+        document_quota_left: START_TOKENS
     });
 }
