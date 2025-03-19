@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Shield, Menu } from 'lucide-react';
@@ -17,7 +18,11 @@ const navItems = [
 	{ href: '/upload', label: 'Demo' },
 ];
 
-export default function Header() {
+type Props = {
+    userTokens: number;
+};
+
+export default function Header(props: Props) {
 	const [isOpen, setIsOpen] = useState(false);
 	const pathname = usePathname();
 
@@ -55,7 +60,10 @@ export default function Header() {
 					<SignedIn>
 						<UserButton />
 					</SignedIn>
-					<Button className='hidden md:flex'>Kom i gang</Button>
+                    <p>{props.userTokens} Tokens</p>
+					<Link href='/buycredits'>
+						<Button className='hidden md:flex'>Kjøp Tokens</Button>
+					</Link>
 					<Sheet open={isOpen} onOpenChange={setIsOpen}>
 						<SheetTrigger asChild>
 							<Button variant='outline' size='icon' className='md:hidden'>
@@ -82,7 +90,9 @@ export default function Header() {
 									Logg inn
 								</Button> */}
 								<SignInButton />
-								<Button className='w-full'>Kom i gang</Button>
+                                <Link href='/buycredits'>
+								    <Button className='w-full'>Kjøp Tokens</Button>
+                                </Link>
 							</nav>
 						</SheetContent>
 					</Sheet>
