@@ -62,7 +62,7 @@ export async function analyzeTXTContract(formData:FormData) {
     }
     const userQuota = await getUserQuotaObject();
     if (userQuota.document_quota_left === 0) {
-        return { error: 'You have no document quota left. Please purchase more queries.' };
+        return { data: null, error: 'Du er tom for tokens, for å analysere flere dokumenter må du kjøpe flere.' };
     }
 
     const file = formData.get('contract') as File | null;
