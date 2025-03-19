@@ -38,6 +38,10 @@ export default function ContractUploader() {
 			alert('Please select a file first.');
 			return;
 		}
+        if (!accepted) {
+            alert('Please accept the disclaimer first.');
+            return;
+        }
 
 		setLoading(true);
 		const formData = new FormData();
@@ -54,6 +58,21 @@ export default function ContractUploader() {
 			JSON.parse(response.data.content[0].text.value),
 		);
 	};
+
+    if (result?.error) {
+        return (
+            <div className='container mx-auto p-4'>
+                <Card className='max-w-lg mx-auto my-8 px-4 py-8'>
+                    <CardHeader>
+                        <h2 className='text-2xl font-bold mb-4'>Error</h2>
+                    </CardHeader>
+                    <CardContent>
+                        <p>{result.error}</p>
+                    </CardContent>
+                </Card>
+            </div>
+        );
+    }
 
 	return (
 		<div className='container mx-auto p-4'>
