@@ -7,6 +7,11 @@ import { randomUUID } from 'crypto';
 import pdfParse from 'pdf-parse';
 // import pdf from 'pdf-parse/lib/pdf-parse';
 import { unlink } from 'fs';
+import { createAdminClient } from '@/appwrite/config';
+import { currentUser } from '@clerk/nextjs/server';
+import { Query } from 'node-appwrite';
+import { TOKENS_PER_QUERY } from '@/config';
+import { revalidateTag } from 'next/cache';
 
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
@@ -42,6 +47,24 @@ const extractTextFromPDF: ExtractTextFromPDF = async (filePath: string): Promise
 
 
 export async function analyzeTXTContract(formData:FormData) {
+
+    // check if the user has any document_quota_left before proceeding, needs to check in the appwrite database based on the users clerk id
+    // if the user has no document_quota_left, return an error message to the user and redirect them to the payment page
+    const { databases } = await createAdminClient();
+    const user = await currentUser();
+    const userId = user?.id;
+
+    const getUserQuotaObject = async () => {
+        const userQuota = await databases.listDocuments('legaledge', 'user_queries', [
+            Query.equal('clerk_user_id', [userId as string]),
+        ]);
+        return userQuota.documents[0];
+    }
+    const userQuota = await getUserQuotaObject();
+    if (userQuota.document_quota_left === 0) {
+        return { error: 'You have no document quota left. Please purchase more queries.' };
+    }
+
     const file = formData.get('contract') as File | null;
 
     if (!file) {
@@ -55,8 +78,6 @@ export async function analyzeTXTContract(formData:FormData) {
     const fileAsText = await extractTextFromPDF(filePath);
 
     try {
-        // console.log('File uploaded to OpenAI, this is fileAsText:', fileAsText);
-
         const thread = await openai.beta.threads.create({
             messages: [
                 {
@@ -69,7 +90,6 @@ export async function analyzeTXTContract(formData:FormData) {
                 }
             ]
         });
-        // console.log('Thread created in server action:', thread.id);
 
         if (!process.env.OPENAI_ASSISTANT_ID) {
             throw new Error('OPENAI_ASSISTANT_ID is not defined');
@@ -77,7 +97,6 @@ export async function analyzeTXTContract(formData:FormData) {
         const run = await openai.beta.threads.runs.create(thread.id, {
             assistant_id: process.env.OPENAI_ASSISTANT_ID,
         });
-        // console.log('Run created in server action:', run.id);
 
         let runStatus;
         do {
@@ -90,6 +109,14 @@ export async function analyzeTXTContract(formData:FormData) {
         console.log(`Messages for thread ${thread.id}:`, JSON.stringify(messages));
 
         const responseObj = messages.data.filter((msg) => msg.role === 'assistant');
+
+        // We need to update the user's document_quota_left in the appwrite database as well as increment documents_analysed field 
+        await databases.updateDocument('legaledge', 'user_queries', userQuota.$id, {
+            document_quota_left: userQuota.document_quota_left - TOKENS_PER_QUERY,
+            documents_analysed: userQuota.documents_analysed + 1,
+        });
+
+        revalidateTag('tokens');
 
         return { data: responseObj[0], error: null };
 
