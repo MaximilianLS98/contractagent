@@ -1,6 +1,7 @@
 import { createAdminClient } from "@/appwrite/config";
 import { Query, ID } from "node-appwrite";
 import { START_TOKENS, TOKENS_PER_QUERY } from "@/config";
+import { revalidateTag } from "next/cache";
 
 export async function addTokens(clerk_user_id: string, numTokens: number) {
     const { databases } = await createAdminClient();
@@ -29,4 +30,5 @@ export async function setUpTokensForFirstTimeUser(clerk_user_id: string) {
         clerk_user_id: clerk_user_id,
         document_quota_left: START_TOKENS
     });
+    revalidateTag('tokens');
 }
