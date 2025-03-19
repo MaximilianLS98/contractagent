@@ -28,7 +28,9 @@ export default async function RootLayout({
   const { getToken } = await auth();
   const token = await getToken();
 
-  const response = await fetch('http://localhost:3000/api/tokens', { 
+  const fetchUrl = process.env.ENVIRONMENT === 'production' ? 'https://legaledge.kaktusfamilien.com/api/tokens' : 'http://localhost:3000/api/tokens';
+
+  const response = await fetch(fetchUrl, { 
     method: 'GET', 
     next: { tags: ['tokens'] }, 
     headers: {
