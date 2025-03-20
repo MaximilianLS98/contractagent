@@ -263,10 +263,10 @@ export default async function Home() {
 						</div>
 						<div className='mx-auto max-w-5xl py-12'>
 							<Tabs defaultValue='time' className='w-full'>
-								<TabsList className='grid w-full grid-cols-3'>
+								<TabsList className='grid w-full grid-cols-2'>
 									<TabsTrigger value='time'>Tidsbesparelse</TabsTrigger>
 									<TabsTrigger value='cost'>Kostnadseffektivitet</TabsTrigger>
-									<TabsTrigger value='accuracy'>Nøyaktighet</TabsTrigger>
+									{/* <TabsTrigger value='accuracy'>Nøyaktighet</TabsTrigger> */}
 								</TabsList>
 								<TabsContent value='time' className='p-6 border rounded-lg mt-6'>
 									<div className='grid gap-6 lg:grid-cols-2'>
@@ -341,7 +341,7 @@ export default async function Home() {
 										</div>
 									</div>
 								</TabsContent>
-								<TabsContent
+								{/* <TabsContent
 									value='accuracy'
 									className='p-6 border rounded-lg mt-6'>
 									<div className='grid gap-6 lg:grid-cols-2'>
@@ -380,7 +380,7 @@ export default async function Home() {
 											</p>
 										</div>
 									</div>
-								</TabsContent>
+								</TabsContent> */}
 							</Tabs>
 						</div>
 						<div className='mx-auto max-w-3xl space-y-8'>
