@@ -55,9 +55,9 @@ export default async function Home() {
 											Se demo
 										</Button>
 									</Link>
-									<Button size='lg' variant='secondary'>
+									{/* <Button size='lg' variant='secondary'>
 										Lær mer
-									</Button>
+									</Button> */}
 								</div>
 							</div>
 							<div className='flex items-center justify-center'>
@@ -135,6 +135,22 @@ export default async function Home() {
 								</p>
 							</div>
 						</div>
+					</div>
+				</section>
+
+				{/* Disclaimer banner */}
+				<section className='bg-primary text-white'>
+					<div className='container px-4 py-4'>
+						<p className='text-center text-md'>Denne nettsiden er en demo.</p>
+						<p className='text-center text-sm'>
+							Ingen informasjon om kontraktene blir lagret, men openAI kan bruke
+							dataene til å forbedre tjenesten sin. Vennligst ikke last opp sensitive
+							eller konfidensielle dokumenter.
+						</p>
+						<p className='text-center text-sm'>
+							Ingen påstander om nøyaktighet eller pålitelighet av analysene er
+							reelle, testet eller gyldige.
+						</p>
 					</div>
 				</section>
 
@@ -435,12 +451,17 @@ export default async function Home() {
 								</p>
 							</div>
 							<div className='flex flex-col gap-2 min-[400px]:flex-row'>
-								<Button size='lg' className='bg-primary hover:bg-primary/90'>
-									Be om en demo <ArrowRight className='ml-2 h-4 w-4' />
-								</Button>
-								<Button size='lg' variant='outline'>
-									Kontakt salg
-								</Button>
+								<Link href='/livedemo'>
+									<Button size='lg' className='bg-primary hover:bg-primary/90'>
+										Prøv din første analyse{' '}
+										<ArrowRight className='ml-2 h-4 w-4' />
+									</Button>
+								</Link>
+								<Link href='/upload'>
+									<Button size='lg' variant='outline'>
+										Se demo
+									</Button>
+								</Link>
 							</div>
 						</div>
 					</div>
@@ -555,7 +576,7 @@ export default async function Home() {
 							<div className='flex items-center gap-2'>
 								<Shield className='h-6 w-6 text-primary' />
 								<span className='text-xl font-semibold tracking-tight'>
-									JuridiskVerifisering AI
+									LegalEdge
 								</span>
 							</div>
 							<p className='text-sm text-muted-foreground'>
@@ -703,7 +724,7 @@ export default async function Home() {
 						</div>
 					</div>
 					<div className='mt-12 border-t pt-8 text-center text-sm text-muted-foreground'>
-						<p>© 2025 JuridiskVerifisering AI. Alle rettigheter reservert.</p>
+						<p>© 2025 LegalEdge. Alle rettigheter reservert.</p>
 					</div>
 				</div>
 			</footer>
