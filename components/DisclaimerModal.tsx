@@ -28,7 +28,9 @@ export default function DisclaimerModal({ onAccept }: DisclaimerModalProps) {
 
 	return (
 		<Dialog open={open} onOpenChange={setOpen}>
-			<DialogContent>
+			<DialogContent
+            onInteractOutside={(e) => e.preventDefault()} // Prevents the dialog from closing when clicking outside the dialog window
+            >
 				<DialogHeader>
 					<DialogTitle>Disclaimer</DialogTitle>
 					{/* <DialogDescription> */}
