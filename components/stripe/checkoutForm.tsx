@@ -20,8 +20,8 @@ interface CheckoutFormProps {
 
 export default function CheckoutForm(props: CheckoutFormProps) {
 	const [loading] = useState<boolean>(false);
-	const [input, setInput] = useState<{ customDonation: number }>({
-		customDonation: Math.round(config.MAX_AMOUNT / config.AMOUNT_STEP),
+	const [input, setInput] = useState<{ totalAmount: number }>({
+		totalAmount: Math.round(config.MAX_AMOUNT / config.AMOUNT_STEP),
 	});
 	const [clientSecret, setClientSecret] = useState<string | null>(null);
 
@@ -49,13 +49,13 @@ export default function CheckoutForm(props: CheckoutFormProps) {
                 <input type="hidden" name="uiMode" value={props.uiMode} />
                 <CustomDonationInput
                     className="checkout-style w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    name="customDonation"
+                    name="totalAmount"
                     min={config.MIN_AMOUNT}
                     max={config.MAX_AMOUNT}
                     step={config.AMOUNT_STEP}
                     currency={config.CURRENCY}
                     onChange={handleInputChange}
-                    value={input.customDonation}
+                    value={input.totalAmount}
                 />
                 <StripeTestCards />
                 <Button

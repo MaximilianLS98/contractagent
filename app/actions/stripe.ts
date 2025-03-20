@@ -30,7 +30,7 @@ export async function createCheckoutSession(
 						name: 'Custom token purchase',
 					},
 					unit_amount: formatAmountForStripe(
-						Number(data.get('customDonation') as string),
+						Number(data.get('totalAmount') as string),
 						CURRENCY,
 					),
 				},
