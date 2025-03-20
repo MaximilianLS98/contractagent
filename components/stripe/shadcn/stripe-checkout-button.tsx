@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Loader2 } from 'lucide-react';
+import { createCheckoutSession } from '@/app/actions/stripe';
 
 interface StripeCheckoutButtonProps {
 	tokenCount: number;
@@ -20,7 +21,22 @@ export default function StripeCheckoutButton({
 	const handleCheckout = async () => {
 		setIsLoading(true);
 
+        
+        
+        
 		try {
+            // create a formData object with the totalAmount as the prop "totalAmount" and uiMode as hosted
+            const data = new FormData();
+            data.append('totalAmount', totalAmount.toString());
+            data.append('uiMode', 'hosted'); // ? Dont plan to use embedded mode, so hosted is hardcoded
+            // call the createCheckoutSession function with the data object
+            const { client_secret, url } = await createCheckoutSession(data); // ? client_secret is used for embedded mode, keeping it incase we want to use it in the future
+            // if embedded mode, set the client_secret
+            // if (uiMode === 'embedded') return setClientSecret(client_secret);
+            // redirect to the url
+    		window.location.assign(url as string);
+
+
 			// In a real implementation, this would call your API to create a Stripe checkout session
 			const response = await fetch('/api/create-checkout-session', {
 				method: 'POST',
@@ -30,15 +46,15 @@ export default function StripeCheckoutButton({
 				body: JSON.stringify({ tokenCount }),
 			});
 
-			const data = await response.json();
+			const dataMock = await response.json();
 
-			if (data.success) {
+			if (dataMock.success) {
 				// In a real implementation, this would redirect to Stripe's checkout page
 				// window.location.href = data.checkoutUrl;
 
 				// For demo purposes, we'll simulate the redirect
 				setTimeout(() => {
-					router.push(data.checkoutUrl);
+					router.push(dataMock.checkoutUrl);
 				}, 1500);
 			} else {
 				console.error('Failed to create checkout session');
