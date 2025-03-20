@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Shield, Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { SignInButton, SignedIn, SignedOut, UserButton, SignUpButton } from '@clerk/nextjs';
 
 const navItems = [
@@ -50,6 +50,7 @@ export default function Header(props: Props) {
 					{/* <Button variant='outline' className='hidden md:flex'>
 						Logg inn
 					</Button> */}
+                    <div className='hidden md:flex gap-4'>
 					<SignedOut>
 						<SignInButton />
 						<SignUpButton />
@@ -57,8 +58,9 @@ export default function Header(props: Props) {
 					<SignedIn>
 						<UserButton />
 					</SignedIn>
-                    <p>{props.userTokens} Tokens</p>
-					<Link href='/buycredits'>
+                    </div>
+					<p>{props.userTokens} Tokens</p>
+					<Link href='/buytokens'>
 						<Button className='hidden md:flex'>Kjøp Tokens</Button>
 					</Link>
 					<Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -68,28 +70,43 @@ export default function Header(props: Props) {
 								<span className='sr-only'>Åpne meny</span>
 							</Button>
 						</SheetTrigger>
-						<SheetContent side='right'>
+						<SheetContent side='right' className='p-2'>
+							<SheetTitle className='text-5xl'>LegalEdge</SheetTitle>
 							<nav className='flex flex-col gap-4'>
 								{navItems.map((item) => (
 									<Link
 										key={item.href}
 										href={item.href}
-										className={`text-sm font-medium transition-colors hover:text-foreground ${
+										className={`text-lg font-medium transition-colors hover:text-foreground border-b-2 ${
 											pathname === item.href
 												? 'text-foreground'
 												: 'text-muted-foreground'
 										}`}
 										onClick={() => setIsOpen(false)}>
 										{item.label}
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            className="h-4 w-4 inline ml-2"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke="currentColor"
+                                            strokeWidth={2}>
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                                        </svg>
 									</Link>
 								))}
-								{/* <Button variant='outline' className='w-full'>
-									Logg inn
-								</Button> */}
-								<SignInButton />
-                                <Link href='/buycredits'>
-								    <Button className='w-full'>Kjøp Tokens</Button>
-                                </Link>
+								<SignedOut>
+									<SignInButton />
+									<SignUpButton />
+								</SignedOut>
+								<SignedIn>
+                                    <div className='absolute bottom-4 right-4'>
+									    <UserButton />
+                                    </div>
+								</SignedIn>
+								<Link href='/buytokens' className='mt-6'>
+									<Button className='w-full'>Kjøp Tokens</Button>
+								</Link>
 							</nav>
 						</SheetContent>
 					</Sheet>
