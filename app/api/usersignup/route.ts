@@ -1,16 +1,56 @@
 import { NextRequest, NextResponse } from "next/server";
 import { setUpTokensForFirstTimeUser } from "@/app/actions/tokens";
+import { Webhook } from 'svix';
+
+
+export const config = {
+	api: {
+		bodyParser: false,
+	},
+};
 
 // This endpoint recieves webhook events from Clerk on user signup, and should set up the tokens for the user in the appwrite database
-export async function POST(req: NextRequest) {
-	const body = await req.json();
-    const clerk_user_id = body.data.id;
+interface ClerkWebhookBody {
+    data: {
+        id: string;
+        [key: string]: any;
+    };
+    [key: string]: any;
+}
+
+export async function POST(req: Request) {
+    const whSecret: string = process.env.CLERK_WEBHOOK_SECRET || "";
+
+    const svix_id = req.headers.get('svix-id') ?? '';
+	const svix_timestamp = req.headers.get('svix-timestamp') ?? '';
+	const svix_signature = req.headers.get('svix-signature') ?? '';
+
+    const body = await req.text();
+
+    const sivx = new Webhook(whSecret);
+
+	let msg;
+
+	try {
+		msg = sivx.verify(body, {
+			'svix-id': svix_id,
+			'svix-timestamp': svix_timestamp,
+			'svix-signature': svix_signature,
+		});
+	} catch (err) {
+		return new Response('Bad Request', { status: 400 });
+	}
+
+    console.log(`Clerk Webhook verified:`, msg);
+    
+
+    const bodyObj: ClerkWebhookBody = await req.json();
+    const clerk_user_id: string = bodyObj.data.id;
 
     // Add tokens to user
-    setUpTokensForFirstTimeUser(clerk_user_id);
+    await setUpTokensForFirstTimeUser(clerk_user_id);
 
-	return NextResponse.json({ message: "Tokens added" }, { status: 200 });
-
+    return NextResponse.json({ message: "Tokens added" }, { status: 200 });
 }
 
 const examplePayload = {
