@@ -9,7 +9,8 @@ import DisclaimerModal from './DisclaimerModal';
 import { Button } from './ui/button';
 import { Spinner } from './ui/Spinner';
 import { Badge } from './ui/badge';
-import { AlertTriangle, CheckCircle, Info } from 'lucide-react';
+import { AlertTriangle, CheckCircle, Info, Upload, FileText } from 'lucide-react';
+
 
 // Define types for response data
 interface ContractAnalysisResult {
@@ -89,6 +90,12 @@ export default function ContractUploader() {
 						onChange={handleFileChange}
 						className='block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 mb-4'
 					/>
+					{file && (
+						<div className='flex items-center space-x-2 my-2 text-sm text-muted-foreground'>
+							<FileText size={16} />
+							<span>{file.name}</span>
+						</div>
+					)}
 					<button
 						onClick={handleUpload}
 						disabled={loading || !file}
