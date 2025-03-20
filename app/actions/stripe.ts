@@ -7,6 +7,7 @@ import { headers } from 'next/headers';
 import { CURRENCY } from '@/config';
 import { formatAmountForStripe } from '@/utils/stripeHelpers';
 import { stripe } from '@/lib/stripe';
+import { auth } from '@clerk/nextjs/server';
 
 export async function createCheckoutSession(
 	data: FormData,
@@ -14,6 +15,8 @@ export async function createCheckoutSession(
 	const ui_mode = data.get('uiMode') as Stripe.Checkout.SessionCreateParams.UiMode;
 
 	const origin: string = (await headers()).get('origin') as string;
+
+    const { userId } = await auth() || { userId: null };
 
 	const checkoutSession: Stripe.Checkout.Session = await stripe.checkout.sessions.create({
 		mode: 'payment',
@@ -24,7 +27,7 @@ export async function createCheckoutSession(
 				price_data: {
 					currency: CURRENCY,
 					product_data: {
-						name: 'Custom amount donation',
+						name: 'Custom token purchase',
 					},
 					unit_amount: formatAmountForStripe(
 						Number(data.get('customDonation') as string),
@@ -41,6 +44,7 @@ export async function createCheckoutSession(
 			return_url: `${origin}/donate-with-embedded-checkout/result?session_id={CHECKOUT_SESSION_ID}`,
 		}),
 		ui_mode,
+		client_reference_id: userId ? userId : undefined,
 	});
 
 	return {
