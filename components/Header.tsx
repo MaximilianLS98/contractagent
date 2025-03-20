@@ -11,10 +11,7 @@ import { SignInButton, SignedIn, SignedOut, UserButton, SignUpButton } from '@cl
 
 const navItems = [
 	{ href: '/', label: 'Hjem' },
-	{ href: '/#features', label: 'Funksjoner' },
-	{ href: '/#how-it-works', label: 'Hvordan det fungerer' },
-	{ href: '/#why-choose', label: 'Hvorfor velge oss' },
-	{ href: '/#faq', label: 'FAQ' },
+	{ href: '/livedemo', label: 'Analyser' },
 	{ href: '/upload', label: 'Demo' },
 ];
 
@@ -31,7 +28,7 @@ export default function Header(props: Props) {
 			<div className='container flex h-16 items-center justify-between'>
 				<Link href='/'>
 					<div className='flex items-center gap-1'>
-						<Shield className='h-6 w-6 text-accent' />
+						<Shield className='h-6 w-6 text-primary' />
 						<span className='text-xl font-semibold tracking-tight'>
 							Legal<span className='text-primary'>Edge</span>
 						</span>
