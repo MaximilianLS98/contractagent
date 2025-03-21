@@ -29,23 +29,24 @@ export async function POST(req: Request) {
 
     const sivx = new Webhook(whSecret);
 
-	let msg;
+	let msg: ClerkWebhookBody;
 
 	try {
 		msg = sivx.verify(body, {
 			'svix-id': svix_id,
 			'svix-timestamp': svix_timestamp,
 			'svix-signature': svix_signature,
-		});
+		}) as ClerkWebhookBody;
 	} catch (err) {
 		return new Response('Bad Request', { status: 400 });
 	}
 
-    console.log(`Clerk Webhook verified:`, msg);
-    
+	console.log(`Clerk Webhook verified:`, msg);
+	
+	const clerk_user_id = msg.data.id;
 
-    const bodyObj: ClerkWebhookBody = await req.json();
-    const clerk_user_id: string = bodyObj.data.id;
+    // const bodyObj: ClerkWebhookBody = await req.json(); // ! This wont work because we already read the body as text
+    // const clerk_user_id: string = bodyObj.data.id;
 
     // Add tokens to user
     await setUpTokensForFirstTimeUser(clerk_user_id);
