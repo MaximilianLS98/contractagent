@@ -27,7 +27,7 @@ export async function createCheckoutSession(
 				price_data: {
 					currency: CURRENCY,
 					product_data: {
-						name: 'Custom token purchase',
+						name: `Tokens ${data.get('tokenCount')}`,
 					},
 					unit_amount: formatAmountForStripe(
 						Number(data.get('totalAmount') as string),
@@ -37,8 +37,8 @@ export async function createCheckoutSession(
 			},
 		],
 		...(ui_mode === 'hosted' && {
-			success_url: `${origin}/buycredits/success?session_id={CHECKOUT_SESSION_ID}`,
-			cancel_url: `${origin}/buycredits`,
+			success_url: `${origin}/buytokens/success?session_id={CHECKOUT_SESSION_ID}`,
+			cancel_url: `${origin}/buytokens`,
 		}),
 		...(ui_mode === 'embedded' && {
 			return_url: `${origin}/donate-with-embedded-checkout/result?session_id={CHECKOUT_SESSION_ID}`,
