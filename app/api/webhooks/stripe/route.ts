@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
         console.log(`Webhook constructed event: ${JSON.stringify(event)}`);
         const data = event.data.object;
         const amountPaid = data.amount_total / 100; // amount_total includes the numbers after the decimal point, so we divide by 100 to get the amount in the correct format
-        const tokensToAdd = amountPaid / NOKPERTOKEN;
+        const tokensToAdd = amountPaid / NOKPERTOKEN; // ! This introduces a bug when my volume discount is implemented, as the amount paid will be less than the amount of tokens to add
 
         await addTokens(data.client_reference_id, tokensToAdd);
 
