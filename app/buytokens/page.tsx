@@ -36,6 +36,7 @@ export default function PaymentPage() {
 		return count * pricePerToken;
 	};
 
+    // ! Not in use - we handle checkout in the StripeCheckoutButton component
 	const handlePayment = async (e: React.FormEvent) => {
 		e.preventDefault();
 		setIsProcessing(true);
