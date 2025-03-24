@@ -36,20 +36,6 @@ export default function PaymentPage() {
 		return count * pricePerToken;
 	};
 
-    // ! Not in use - we handle checkout in the StripeCheckoutButton component
-	const handlePayment = async (e: React.FormEvent) => {
-		e.preventDefault();
-		setIsProcessing(true);
-
-		// In a real implementation, we would:
-		// 1. Call your backend to create a Stripe Checkout Session
-		// 2. Redirect to Stripe's hosted checkout page
-
-		// Simulate redirecting to Stripe and then coming back
-		setTimeout(() => {
-			router.push('/payment/success?tokens=' + tokenCount);
-		}, 1500);
-	};
 
 	const totalPrice = getDiscountedPrice(tokenCount);
 
@@ -75,12 +61,12 @@ export default function PaymentPage() {
 
 						<Card className='mt-8'>
 							<CardHeader>
-								<CardTitle>Order Summary</CardTitle>
+								<CardTitle>Ordresammendrag</CardTitle>
 							</CardHeader>
 							<CardContent className='space-y-4'>
 								<div className='flex justify-between'>
 									<span className='text-gray-500'>
-										{tokenCount} Tokens (2 NOK each)
+										{tokenCount} Tokens (2 NOK per stk)
 									</span>
 									<span>{tokenCount * 2} NOK</span>
 								</div>
@@ -88,7 +74,7 @@ export default function PaymentPage() {
 								{tokenCount >= 100 && (
 									<div className='flex justify-between text-green-600'>
 										<span>
-											Volume Discount
+											Volumrabatt
 											{tokenCount >= 1000
 												? ' (15%)'
 												: tokenCount >= 500
@@ -100,7 +86,7 @@ export default function PaymentPage() {
 								)}
 
 								<div className='flex justify-between border-t pt-4'>
-									<span className='font-medium'>Total</span>
+									<span className='font-medium'>Totalt</span>
 									<span className='font-bold text-blue-600'>
 										{totalPrice.toFixed(2)} NOK
 									</span>
@@ -117,9 +103,9 @@ export default function PaymentPage() {
 					<div>
 						<Card>
 							<CardHeader>
-								<CardTitle>Complete Your Purchase</CardTitle>
+								<CardTitle>Fullfør kjøpet ditt</CardTitle>
 								<CardDescription>
-									You'll be redirected to Stripe's secure checkout page
+									Du vil bli omdirigert til Stripe for å fullføre kjøpet.
 								</CardDescription>
 							</CardHeader>
 							<CardContent>
@@ -148,7 +134,7 @@ export default function PaymentPage() {
 										/> */}
 									</div>
 									<span className='text-sm text-gray-500'>
-										and more payment methods
+										Betal med Visa, Mastercard eller andre betalingsmetoder
 									</span>
 								</div>
 							</CardFooter>
