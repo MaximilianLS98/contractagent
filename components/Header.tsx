@@ -13,6 +13,7 @@ const navItems = [
 	{ href: '/', label: 'Hjem' },
 	{ href: '/livedemo', label: 'Analyser' },
 	{ href: '/upload', label: 'Demo' },
+	{ href: '/contact', label: 'Kontakt' },
 ];
 
 type Props = {
