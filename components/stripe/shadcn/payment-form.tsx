@@ -47,7 +47,7 @@ export default function PaymentForm({ onSubmit, isProcessing, totalAmount }: Pay
 								d='M5 13l4 4L19 7'
 							/>
 						</svg>
-						No account required
+                        Ingen data lagres hos oss.
 					</li>
 					<li className='flex items-center gap-2'>
 						<svg

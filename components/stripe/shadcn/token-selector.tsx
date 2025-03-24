@@ -71,7 +71,7 @@ export default function TokenSelector({
 	return (
 		<div className='space-y-6'>
 			<div className='space-y-2'>
-				<h2 className='text-lg font-medium'>Select Token Amount</h2>
+				<h2 className='text-lg font-medium'>Velg antall Tokens</h2>
 				<p className='text-sm text-gray-500'>
 					Velg hvor mange tokens du vil kjøpe. Hver Token koster {pricePerToken}{' '}{ CURRENCY.toUpperCase() } og lar
 					deg analysere ett dokument.
@@ -148,7 +148,7 @@ export default function TokenSelector({
 					<div className='space-y-4'>
 						<div className='flex justify-between items-center'>
 							<div>
-								<p className='text-sm font-medium'>Subtotal</p>
+								<p className='text-sm font-medium'>Delsum</p>
 								<p className='text-xs text-gray-500'>
 									{tokenCount} tokens × {pricePerToken} {currency}
 								</p>
@@ -161,9 +161,9 @@ export default function TokenSelector({
 						{getDiscountInfo(tokenCount).rate > 0 && (
 							<div className='flex justify-between items-center text-green-600'>
 								<div>
-									<p className='text-sm font-medium'>Volume Discount</p>
+									<p className='text-sm font-medium'>Volumrabatt</p>
 									<p className='text-xs'>
-										{getDiscountInfo(tokenCount).rate}% off
+										{getDiscountInfo(tokenCount).rate}% av
 									</p>
 								</div>
 								<p className='text-lg font-medium'>
@@ -181,10 +181,10 @@ export default function TokenSelector({
 
 						<div className='flex justify-between items-center pt-2 border-t'>
 							<div>
-								<p className='text-sm font-bold'>Total Price</p>
+								<p className='text-sm font-bold'>Totalpris</p>
 								{getDiscountInfo(tokenCount).rate > 0 && (
 									<p className='text-xs text-green-600'>
-										{getDiscountInfo(tokenCount).rate}% discount applied
+										{getDiscountInfo(tokenCount).rate}% rabatt inkludert
 									</p>
 								)}
 							</div>

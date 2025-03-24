@@ -47,10 +47,10 @@ export default function StripeCheckoutButton({
 			{isLoading ? (
 				<>
 					<Loader2 className='mr-2 h-5 w-5 animate-spin' />
-					Redirecting to Stripe...
+					Omdirigerer til Stripe...
 				</>
 			) : (
-				<>Checkout with Stripe • {totalAmount.toFixed(2)} NOK</>
+				<>Checkout med Stripe • {totalAmount.toFixed(2)} NOK</>
 			)}
 		</Button>
 	);
