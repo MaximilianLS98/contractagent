@@ -4,12 +4,11 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import Header from "@/components/Header"
 import { DemoBanner } from "@/components/Demo-banner"
-import {
-	ClerkProvider,
-} from '@clerk/nextjs';
+import { ClerkProvider } from '@clerk/nextjs';
 import { currentUser } from "@clerk/nextjs/server"
 import { createAdminClient } from "@/appwrite/config"
 import { auth } from "@clerk/nextjs/server"
+import { PostHogProvider } from "@/components/PostHogProvider"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -43,12 +42,13 @@ export default async function RootLayout({
 		<ClerkProvider>
 			<html lang='en'>
 				<body className={inter.className}>
+          <PostHogProvider>
 					<Header userTokens={data.tokens} />
 					<DemoBanner />
 					{children}
+          </PostHogProvider>
 				</body>
 			</html>
 		</ClerkProvider>
   );
 }
-
