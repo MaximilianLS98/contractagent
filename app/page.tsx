@@ -701,7 +701,7 @@ export default async function Home() {
 								</li>
 								<li>
 									<Link
-										href='#'
+										href='/privacy-policy'
 										className='text-muted-foreground hover:text-foreground'>
 										Personvernregler
 									</Link>
