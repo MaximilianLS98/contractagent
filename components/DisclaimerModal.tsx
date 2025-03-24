@@ -34,29 +34,27 @@ export default function DisclaimerModal({ onAccept }: DisclaimerModalProps) {
 				<DialogHeader>
 					<DialogTitle>Disclaimer</DialogTitle>
 					{/* <DialogDescription> */}
-						<p>
-							This contract analyzer is a <strong>demonstration tool</strong> and is{' '}
-							<strong>not intended for real-world use</strong>.
-						</p>
-						<ul className='mt-2 list-disc list-inside text-sm'>
-							<li>
-								Do not upload sensitive, confidential, or legally binding documents.
-							</li>
-							<li>The analysis is automated and may contain inaccuracies.</li>
-							<li>
-								This tool does <strong>not</strong> replace professional legal
-								advice.
-							</li>
-							<li>
-								The provider assumes <strong>no liability</strong> for any use of
-								this tool.
-							</li>
-						</ul>
-						<div className='mt-4 flex items-center space-x-2'>
-							<Checkbox id='agree' checked={agreed} onCheckedChange={(checked) => setAgreed(checked === true)} />
-							<label htmlFor='agree' className='text-sm'>
-								I understand and accept these terms.
-							</label>
+                        <p>
+                            Denne kontraktanalysetjenesten er et <strong>demonstrasjonsverktøy</strong> og er{' '}
+                            <strong>ikke ment for bruk i virkelige situasjoner</strong>.
+                        </p>
+                        <ul className='mt-2 list-disc list-inside text-sm'>
+                            <li>
+                                Ikke last opp sensitive, konfidensielle eller juridisk bindende dokumenter.
+                            </li>
+                            <li>Analysen er automatisert og kan inneholde unøyaktigheter.</li>
+                            <li>
+                                Denne tjenesten <strong>erstatter ikke</strong> profesjonell juridisk rådgivning.
+                            </li>
+                            <li>
+                                Leverandøren påtar seg <strong>intet ansvar</strong> for bruk av dette verktøyet.
+                            </li>
+                        </ul>
+                        <div className='mt-4 flex items-center space-x-2'>
+                            <Checkbox id='agree' checked={agreed} onCheckedChange={(checked) => setAgreed(checked === true)} />
+                            <label htmlFor='agree' className='text-sm'>
+                                Jeg forstår og aksepterer disse vilkårene.
+                            </label>
 						</div>
 					{/* </DialogDescription> */}
 				</DialogHeader>
