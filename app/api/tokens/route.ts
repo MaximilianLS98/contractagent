@@ -18,7 +18,7 @@ export async function GET() {
 
 		const { databases } = await createAdminClient();
 		const result = await databases.getDocument(dbId, collectionId, userId, [
-            Query.select(['document_quota_left'])
+            Query.select(['document_quota_left', '$id'])
         ]);
 		// if no document is found, the user is new and we need to set up the tokens for them (this should never happen, as the new user tokens should be set up by clerk webhooks)
 		if (!result.$id) {
