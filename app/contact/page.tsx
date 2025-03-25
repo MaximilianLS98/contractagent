@@ -156,7 +156,7 @@ export default function ContactPage() {
 						<div className='flex items-start space-x-3'>
 							<Clock className='h-5 w-5 text-primary mt-0.5' />
 							<div>
-								<p className='font-medium'>Mandag - Friday</p>
+								<p className='font-medium'>Mandag - Fredag</p>
 								<p className='text-muted-foreground'>9:00 - 17:00</p>
 							</div>
 						</div>
