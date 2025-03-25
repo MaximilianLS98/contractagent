@@ -20,6 +20,11 @@ export default function StripeCheckoutButton({
 
 	const handleCheckout = async () => {
 		setIsLoading(true);
+        if (totalAmount < 6) {
+            alert('Minimum totalAmount is 6 NOK'); // ! This should be a toast
+            setIsLoading(false);
+            return;
+        }
 		try {
             // create a formData object with the totalAmount as the prop "totalAmount" and uiMode as hosted
             const data = new FormData();
