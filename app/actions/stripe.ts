@@ -12,6 +12,10 @@ import { auth } from '@clerk/nextjs/server';
 export async function createCheckoutSession(
 	data: FormData,
 ): Promise<{ client_secret: string | null; url: string | null }> {
+    // Check if the totalAmount is more than 10, we dont want to ever accept less than 10 NOK
+    if (Number(data.get('totalAmount') as string) < 10) {
+        throw new Error('Minimum totalAmount is 10 NOK');
+    }
 	const ui_mode = data.get('uiMode') as Stripe.Checkout.SessionCreateParams.UiMode;
 
 	const origin: string = (await headers()).get('origin') as string;
