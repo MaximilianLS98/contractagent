@@ -54,10 +54,10 @@ export default function ContractUploader() {
 		setResult(response);
 		setParsedResult(JSON.parse(response.data?.content[0].text.value));
 		setLoading(false);
-		console.log(
-			`json response from analyzeTXTContract:`,
-			JSON.parse(response.data.content[0].text.value),
-		);
+		// console.log(
+		// 	`json response from analyzeTXTContract:`,
+		// 	JSON.parse(response.data.content[0].text.value),
+		// );
 	};
 
     if (result?.error) {
@@ -126,7 +126,7 @@ export default function ContractUploader() {
 			</Card>
 			{result && (
 				<div className='mt-4 p-4 bg-gray-100 rounded-lg'>
-					<h3 className='text-xl font-semibold mb-2'>Analysis Result:</h3>
+					<h3 className='text-xl font-semibold mb-2'>Resultat av analyse: {parsedResult.contract_type}</h3>
 					{/* <pre>{JSON.stringify(result, null, 4)}</pre> */}
 					{/* <pre>{JSON.stringify(parsedResult, null, 4)}</pre> */}
 					<h2 className='text-lg font-semibold mt-6'>Viktige klausuler</h2>

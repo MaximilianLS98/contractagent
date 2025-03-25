@@ -13,6 +13,8 @@ import { Query } from 'node-appwrite';
 import { TOKENS_PER_QUERY } from '@/config';
 import { revalidateTag } from 'next/cache';
 
+const dbId = process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID as string;
+const collectionId = process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_ID as string;
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
@@ -106,12 +108,12 @@ export async function analyzeTXTContract(formData:FormData) {
 		} while (runStatus.status !== 'completed');
 
         const messages = await openai.beta.threads.messages.list(thread.id);
-        console.log(`Messages for thread ${thread.id}:`, JSON.stringify(messages));
+        // console.log(`Messages for thread ${thread.id}:`, JSON.stringify(messages));
 
         const responseObj = messages.data.filter((msg) => msg.role === 'assistant');
 
         // We need to update the user's document_quota_left in the appwrite database as well as increment documents_analysed field 
-        await databases.updateDocument('legaledge', 'user_queries', userQuota.$id, {
+        await databases.updateDocument(dbId, collectionId, userQuota.$id, {
             document_quota_left: userQuota.document_quota_left - TOKENS_PER_QUERY,
             documents_analysed: userQuota.documents_analysed + 1,
         });

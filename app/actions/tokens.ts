@@ -3,7 +3,8 @@ import { Query, ID } from "node-appwrite";
 import { START_TOKENS, TOKENS_PER_QUERY } from "@/config";
 import { revalidateTag } from "next/cache";
 
-const dbId = process.env.APPWRITE_DB_ID as string;
+const dbId = process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID as string;
+const collectionId = process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_ID as string;
 
 export async function addTokens(clerk_user_id: string, numTokens: number) {
     const { databases } = await createAdminClient();
@@ -28,7 +29,7 @@ export async function addTokens(clerk_user_id: string, numTokens: number) {
 
 export async function setUpTokensForFirstTimeUser(clerk_user_id: string) {
     const { databases } = await createAdminClient();
-    await databases.createDocument(dbId, 'user_queries', clerk_user_id, {
+    await databases.createDocument(dbId, collectionId, clerk_user_id, {
         clerk_user_id: clerk_user_id,
         document_quota_left: START_TOKENS
     });
