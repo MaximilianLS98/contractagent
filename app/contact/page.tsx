@@ -19,8 +19,10 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '@/components/ui/select';
+import { sendEmail } from '../actions/resend';
 
 export default function ContactPage() {
+
 	return (
 		<div className='container mx-auto px-4 py-12'>
 			<div className='text-center mb-12'>
@@ -95,53 +97,64 @@ export default function ContactPage() {
 						</CardDescription>
 					</CardHeader>
 					<CardContent>
-						<form className='space-y-4'>
+						<form action={sendEmail} className='space-y-4'>
 							<div className='grid gap-4 md:grid-cols-2'>
 								<div className='space-y-2'>
-									<Label htmlFor='first-name'>First name</Label>
-									<Input id='first-name' placeholder='John' />
+									<Label htmlFor='firstName'>Fornavn</Label>
+									<Input id='firstName' name='firstName' placeholder='John' />
 								</div>
 								<div className='space-y-2'>
-									<Label htmlFor='last-name'>Last name</Label>
-									<Input id='last-name' placeholder='Doe' />
+									<Label htmlFor='lastName'>Etternavn</Label>
+									<Input id='lastName' name='lastName' placeholder='Doe' />
 								</div>
 							</div>
 							<div className='space-y-2'>
-								<Label htmlFor='email'>Email</Label>
-								<Input id='email' type='email' placeholder='john.doe@example.com' />
+								<Label htmlFor='email'>E-post</Label>
+								<Input
+									id='email'
+									name='email'
+									type='email'
+									placeholder='john.doe@example.com'
+								/>
 							</div>
 							<div className='space-y-2'>
-								<Label htmlFor='phone'>Phone (optional)</Label>
-								<Input id='phone' type='tel' placeholder='+1 (555) 123-4567' />
+								<Label htmlFor='phone'>Telefon (Valgfritt)</Label>
+								<Input
+									id='phone'
+									name='phone'
+									type='tel'
+									placeholder='456 78 910'
+								/>
 							</div>
 							<div className='space-y-2'>
-								<Label htmlFor='inquiry-type'>Inquiry type</Label>
-								<Select>
-									<SelectTrigger id='inquiry-type'>
-										<SelectValue placeholder='Select an inquiry type' />
+								<Label htmlFor='inquiry-type'>Type henvendelse</Label>
+								<Select defaultValue='general' name='inq_type'>
+									<SelectTrigger id='inquiry-type' name='inq_type'>
+										<SelectValue placeholder='Velg en type henvendelse' />
 									</SelectTrigger>
 									<SelectContent>
-										<SelectItem value='general'>General Inquiry</SelectItem>
-										<SelectItem value='sales'>Sales</SelectItem>
-										<SelectItem value='support'>Technical Support</SelectItem>
-										<SelectItem value='billing'>Billing</SelectItem>
-										<SelectItem value='partnership'>Partnership</SelectItem>
+										<SelectItem value='general'>Generell henvendelse</SelectItem>
+										<SelectItem value='sales'>Salg</SelectItem>
+										<SelectItem value='support'>Teknisk Support</SelectItem>
+										<SelectItem value='billing'>Betaling</SelectItem>
+										<SelectItem value='partnership'>Partnerskap</SelectItem>
 									</SelectContent>
 								</Select>
 							</div>
 							<div className='space-y-2'>
-								<Label htmlFor='message'>Message</Label>
+								<Label htmlFor='message'>Beskjed</Label>
 								<Textarea
 									id='message'
-									placeholder='How can we help you?'
+									name='message'
+									placeholder='Hvordan kan vi hjelpe deg?'
 									className='min-h-[120px]'
 								/>
 							</div>
+							<Button type='submit' className='w-full'>
+								Send melding
+							</Button>
 						</form>
 					</CardContent>
-					<CardFooter>
-						<Button className='w-full'>Send Message</Button>
-					</CardFooter>
 				</Card>
 
 				<Card>
