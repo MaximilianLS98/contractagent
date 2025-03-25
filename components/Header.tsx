@@ -51,15 +51,15 @@ export default function Header(props: Props) {
 					{/* <Button variant='outline' className='hidden md:flex'>
 						Logg inn
 					</Button> */}
-                    <div className='hidden md:flex gap-4'>
-					<SignedOut>
-						<SignInButton />
-						<SignUpButton />
-					</SignedOut>
-					<SignedIn>
-						<UserButton />
-					</SignedIn>
-                    </div>
+					<div className='hidden md:flex gap-4'>
+						<SignedOut>
+							<SignInButton>Logg inn</SignInButton>
+							<SignUpButton>Registrer</SignUpButton>
+						</SignedOut>
+						<SignedIn>
+							<UserButton />
+						</SignedIn>
+					</div>
 					<p>{props.userTokens} Tokens</p>
 					<Link href='/buytokens'>
 						<Button className='hidden md:flex'>Kjøp Tokens</Button>
@@ -85,25 +85,29 @@ export default function Header(props: Props) {
 										}`}
 										onClick={() => setIsOpen(false)}>
 										{item.label}
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            className="h-4 w-4 inline ml-2"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            stroke="currentColor"
-                                            strokeWidth={2}>
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                                        </svg>
+										<svg
+											xmlns='http://www.w3.org/2000/svg'
+											className='h-4 w-4 inline ml-2'
+											fill='none'
+											viewBox='0 0 24 24'
+											stroke='currentColor'
+											strokeWidth={2}>
+											<path
+												strokeLinecap='round'
+												strokeLinejoin='round'
+												d='M9 5l7 7-7 7'
+											/>
+										</svg>
 									</Link>
 								))}
 								<SignedOut>
-									<SignInButton />
-									<SignUpButton />
+									<SignInButton>Logg inn</SignInButton>
+									<SignUpButton>Registrer</SignUpButton>
 								</SignedOut>
 								<SignedIn>
-                                    <div className='absolute bottom-4 right-4'>
-									    <UserButton />
-                                    </div>
+									<div className='absolute bottom-4 right-4'>
+										<UserButton />
+									</div>
 								</SignedIn>
 								<Link href='/buytokens' className='mt-6'>
 									<Button className='w-full'>Kjøp Tokens</Button>
