@@ -1,26 +1,25 @@
 'use server';
 
 import type { Stripe } from 'stripe';
-
 import { headers } from 'next/headers';
-
 import { CURRENCY } from '@/config';
 import { formatAmountForStripe } from '@/utils/stripeHelpers';
 import { stripe } from '@/lib/stripe';
 import { auth } from '@clerk/nextjs/server';
+import PostHogClient from '@/posthog';
 
 export async function createCheckoutSession(
 	data: FormData,
 ): Promise<{ client_secret: string | null; url: string | null }> {
-    // Check if the totalAmount is more than 10, we dont want to ever accept less than 10 NOK
-    if (Number(data.get('totalAmount') as string) < 10) {
-        throw new Error('Minimum totalAmount is 10 NOK');
-    }
+	// Check if the totalAmount is more than 10, we dont want to ever accept less than 10 NOK
+	if (Number(data.get('totalAmount') as string) < 10) {
+		throw new Error('Minimum totalAmount is 10 NOK');
+	}
 	const ui_mode = data.get('uiMode') as Stripe.Checkout.SessionCreateParams.UiMode;
 
 	const origin: string = (await headers()).get('origin') as string;
 
-    const { userId } = await auth() || { userId: null };
+	const { userId } = (await auth()) || { userId: null };
 
 	const checkoutSession: Stripe.Checkout.Session = await stripe.checkout.sessions.create({
 		mode: 'payment',
@@ -50,6 +49,18 @@ export async function createCheckoutSession(
 		ui_mode,
 		client_reference_id: userId ? userId : undefined,
 	});
+
+	const posthog = PostHogClient();
+	posthog.capture({
+		distinctId: userId!,
+		event: 'checkout_session_created',
+		properties: { 
+            checkoutSessionId: checkoutSession.id,
+            origin,
+            amount: Number(data.get('totalAmount')), 
+        },
+	});
+	await posthog.shutdown();
 
 	return {
 		client_secret: checkoutSession.client_secret,
