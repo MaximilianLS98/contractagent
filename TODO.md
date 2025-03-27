@@ -4,7 +4,8 @@
 - [x] Set up Stripe for production
 - [x] Add a favicon
 - [ ] Meta tags for SEO
-- [ ] Fix bug when buying tokens, volume discount messes up the amount of tokens credited
+- [ ] Fix disclaimer modal consent being saved between sessions (Either clerk publicMetaData or localstorage)
+- [X] Fix bug when buying tokens, volume discount messes up the amount of tokens credited
 - [x] Fix "bug" where it doesnt accept files larger than 2mb (Nextjs config for route handlers and server actions)
 
 
