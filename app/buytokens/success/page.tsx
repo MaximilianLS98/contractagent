@@ -14,13 +14,14 @@ import {
 import { CheckCircle, ArrowRight } from 'lucide-react';
 import type { Stripe } from 'stripe';
 import { stripe } from '@/lib/stripe';
+import { NOKPERTOKEN } from '@/config';
 
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
 
 export default async function ResultPage(props: { searchParams: SearchParams }) {
 	const searchParams = await props.searchParams;
 
-    if (!searchParams.session_id)
+	if (!searchParams.session_id)
 		throw new Error('Please provide a valid session_id (`cs_test_...`)');
 
 	const checkoutSession: Stripe.Checkout.Session = await stripe.checkout.sessions.retrieve(
@@ -29,6 +30,12 @@ export default async function ResultPage(props: { searchParams: SearchParams }) 
 			expand: ['line_items', 'payment_intent'],
 		},
 	);
+
+	const lineItemName = checkoutSession.line_items?.data[0].description; // in the form of "Tokens 1000" for example, we need to extract the number
+	if (!lineItemName) {
+		throw new Error('No line items found');
+	}
+	const tokensBought = parseInt(lineItemName.split(' ')[1]); // get the number of tokens bought
 
 	const paymentIntent = checkoutSession.payment_intent as Stripe.PaymentIntent;
 	// const searchParams = useSearchParams();
@@ -67,22 +74,22 @@ export default async function ResultPage(props: { searchParams: SearchParams }) 
 					<div className='mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-100'>
 						<CheckCircle className='h-10 w-10 text-green-600' />
 					</div>
-					<CardTitle className='text-2xl'>Payment Successful!</CardTitle>
+					<CardTitle className='text-2xl'>Betaling vellykket!</CardTitle>
 					<p className='text-sm text-gray-500 mt-2'>
-						Payment processed securely via Stripe
+						Betalingen prosessert gjennom Stripe 
 					</p>
-					<CardDescription>Thank you for your purchase</CardDescription>
+					<CardDescription>Tusen takk for ditt kjøp</CardDescription>
 				</CardHeader>
 				<CardContent className='space-y-4'>
 					<div className='rounded-lg bg-blue-50 p-4'>
 						<div className='text-center space-y-2'>
-							<p className='text-sm text-gray-500'>You have purchased</p>
-							<p className='text-3xl font-bold text-blue-600'>{((checkoutSession.amount_total ?? 0) / 2) / 100} Tokens</p>
+							<p className='text-sm text-gray-500'>Du har kjøpt</p>
+							<p className='text-3xl font-bold text-blue-600'>
+								{tokensBought} Tokens
+							</p>
 
 							<div className='text-sm'>
-								<p className='text-gray-500'>
-									Base price: 2 NOK dummy
-								</p>
+								<p className='text-gray-500'>Base price: {NOKPERTOKEN} NOK</p>
 
 								{/* {orderDetails.discountRate > 0 && (
 									<p className='text-green-600'>
@@ -92,7 +99,7 @@ export default async function ResultPage(props: { searchParams: SearchParams }) 
 								)} */}
 
 								<p className='font-medium mt-1'>
-									Total paid: {(checkoutSession.amount_total ?? 0) / 100} NOK
+									Totalt betalt: {checkoutSession.amount_total! / 100} NOK
 								</p>
 							</div>
 						</div>
@@ -103,15 +110,12 @@ export default async function ResultPage(props: { searchParams: SearchParams }) 
 						<div className='flex justify-between text-sm'>
 							<span className='text-gray-500'>Order ID</span>
 							<span>
-								ORD-
-								{Math.floor(Math.random() * 10000)
-									.toString()
-									.padStart(4, '0')}
+								{checkoutSession.id.slice(9, 18)}-...
 							</span>
 						</div>
 						<div className='flex justify-between text-sm'>
 							<span className='text-gray-500'>Date</span>
-							<span>{new Date().toLocaleDateString()}</span>
+							<span>{new Date(checkoutSession.created * 1000).toLocaleString()}</span>
 						</div>
 						<div className='flex justify-between text-sm'>
 							<span className='text-gray-500'>Payment Method</span>
@@ -122,14 +126,15 @@ export default async function ResultPage(props: { searchParams: SearchParams }) 
 				<CardFooter className='flex flex-col gap-4'>
 					<Button asChild className='w-full bg-blue-600 hover:bg-blue-700'>
 						<Link href='/dashboard'>
-							Go to Dashboard <ArrowRight className='ml-2 h-4 w-4' />
+							Gå til analyse-siden <ArrowRight className='ml-2 h-4 w-4' />
 						</Link>
 					</Button>
 					<Button variant='outline' asChild className='w-full'>
-						<Link href='/'>Return to Home</Link>
+						<Link href='/'>Gå til hovedsiden</Link>
 					</Button>
 				</CardFooter>
 			</Card>
+			{/* <pre>{JSON.stringify(checkoutSession, null, 4)}</pre> */}
 		</div>
 	);
 }
