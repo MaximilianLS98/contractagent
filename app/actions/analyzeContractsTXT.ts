@@ -12,6 +12,7 @@ import { currentUser } from '@clerk/nextjs/server';
 import { Query } from 'node-appwrite';
 import { TOKENS_PER_QUERY } from '@/config';
 import { revalidateTag } from 'next/cache';
+import PostHogClient from '@/posthog';
 
 const dbId = process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID as string;
 const collectionId = process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_ID as string;
@@ -117,6 +118,17 @@ export async function analyzeTXTContract(formData:FormData) {
             document_quota_left: userQuota.document_quota_left - TOKENS_PER_QUERY,
             documents_analysed: userQuota.documents_analysed + 1,
         });
+
+        const posthog = PostHogClient();
+        posthog.capture({
+            distinctId: userId as string,
+            event: 'Document Analyzed',
+            properties: {
+                document_type: 'contract',
+                document_name: file.name,
+            },
+        });
+        await posthog.shutdown();
 
         revalidateTag('tokens');
 
