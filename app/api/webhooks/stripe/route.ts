@@ -1,8 +1,10 @@
 import { NextResponse, NextRequest } from "next/server";
 import { stripe } from "@/lib/stripe";
+import type { Stripe } from 'stripe';
 import { headers } from "next/headers";
 import { NOKPERTOKEN } from "@/config";
 import { addTokens } from "@/app/actions/tokens";
+import PostHogClient from "@/posthog";
 
 export async function POST(req: NextRequest) {
     console.log(`Webhook received in /webhooks/stripe`);
@@ -14,10 +16,32 @@ export async function POST(req: NextRequest) {
         const event = stripe.webhooks.constructEvent(body, sig, webhookSecret) as ConstructedEvent;
         console.log(`Webhook constructed event: ${JSON.stringify(event)}`);
         const data = event.data.object;
-        const amountPaid = data.amount_total / 100; // amount_total includes the numbers after the decimal point, so we divide by 100 to get the amount in the correct format
-        const tokensToAdd = amountPaid / NOKPERTOKEN; // ! This introduces a bug when my volume discount is implemented, as the amount paid will be less than the amount of tokens to add
+        const amountPaid = data.amount_total / 100;
+        const checkoutSession: Stripe.Checkout.Session = await stripe.checkout.sessions.retrieve( data.id,
+			{
+				expand: ['line_items', 'payment_intent'],
+			},
+		);
 
-        await addTokens(data.client_reference_id, tokensToAdd);
+        const lineItemName = checkoutSession.line_items?.data[0].description; // in the form of "Tokens 1000" for example, we need to extract the number
+        if (!lineItemName) {
+            throw new Error('No line items found');
+        }
+        const tokensBought = parseInt(lineItemName.split(' ')[1]); // get the number of tokens bought
+
+        await addTokens(data.client_reference_id, tokensBought);
+
+        const posthog = PostHogClient();
+        posthog.capture({
+            distinctId: data.client_reference_id,
+            event: 'purchase',
+            properties: {
+                amountPaid,
+                tokensBought,
+                id: data.id,
+            },
+        });
+        posthog.shutdown();
 
     } catch (err) {
         console.error(`Webhook Error: ${err}`);
