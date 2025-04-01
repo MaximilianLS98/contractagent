@@ -57,7 +57,7 @@ export async function createCheckoutSession(
 		properties: { 
             checkoutSessionId: checkoutSession.id,
             origin,
-            amount: Number(data.get('totalAmount')), 
+            amount: Number(data.get('totalAmount')) / 100, 
         },
 	});
 	await posthog.shutdown();

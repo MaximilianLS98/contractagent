@@ -10,6 +10,7 @@ import { currentUser } from "@clerk/nextjs/server"
 import { createAdminClient } from "@/appwrite/config"
 import { auth } from "@clerk/nextjs/server"
 import { PostHogProvider } from "@/components/PostHogProvider"
+import { Toaster } from "sonner"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -25,29 +26,16 @@ export default async function RootLayout({
   children: React.ReactNode
 }) {
 
-  const { getToken } = await auth();
-  const token = await getToken();
-
-  const fetchUrl = process.env.ENVIRONMENT === 'production' ? 'https://legaledge.kaktusfamilien.com/api/tokens' : 'http://localhost:3000/api/tokens';
-
-  const response = await fetch(fetchUrl, { 
-    method: 'GET', 
-    next: { tags: ['tokens'] }, 
-    headers: {
-      'Authorization': `Bearer ${token}`
-    }
-  });
-  const data = await response.json();
-
   return (
 		<ClerkProvider>
 			<html lang='en'>
 				<body className={inter.className}>
           <PostHogProvider>
-					<Header userTokens={data.tokens} />
+					<Header />
 					<DemoBanner />
 					{children}
           <Footer />
+          <Toaster richColors />
           </PostHogProvider>
 				</body>
 			</html>
