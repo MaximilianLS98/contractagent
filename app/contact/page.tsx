@@ -1,3 +1,5 @@
+'use client';
+import { useActionState, useState } from 'react';
 import Link from 'next/link';
 import { Mail, Phone, MapPin, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -22,6 +24,11 @@ import {
 import { sendEmail } from '../actions/resend';
 
 export default function ContactPage() {
+	const [response, formAction, isPending] = useActionState(sendEmail, {
+		success: false,
+		data: null,
+		error: undefined,
+	});
 
 	return (
 		<div className='container mx-auto px-4 py-12'>
@@ -91,13 +98,14 @@ export default function ContactPage() {
 			<div className='grid gap-8 md:grid-cols-2'>
 				<Card>
 					<CardHeader>
-						<CardTitle>Send us a message</CardTitle>
+						<CardTitle>Send oss en beskjed</CardTitle>
 						<CardDescription>
-							Fill out the form below and we'll get back to you as soon as possible.
+							Fyll ut skjemaet nedenfor, så kommer vi tilbake til deg så fort som
+							mulig.
 						</CardDescription>
 					</CardHeader>
 					<CardContent>
-						<form action={sendEmail} className='space-y-4'>
+						<form action={formAction} className='space-y-4'>
 							<div className='grid gap-4 md:grid-cols-2'>
 								<div className='space-y-2'>
 									<Label htmlFor='firstName'>Fornavn</Label>
@@ -133,7 +141,9 @@ export default function ContactPage() {
 										<SelectValue placeholder='Velg en type henvendelse' />
 									</SelectTrigger>
 									<SelectContent>
-										<SelectItem value='general'>Generell henvendelse</SelectItem>
+										<SelectItem value='general'>
+											Generell henvendelse
+										</SelectItem>
 										<SelectItem value='sales'>Salg</SelectItem>
 										<SelectItem value='support'>Teknisk Support</SelectItem>
 										<SelectItem value='billing'>Betaling</SelectItem>
@@ -154,6 +164,16 @@ export default function ContactPage() {
 								Send melding
 							</Button>
 						</form>
+						{response.success && (
+							<div className='mt-4 p-4 bg-green-50 text-green-700 rounded-lg'>
+								<p>Meldingen din har blitt sendt!</p>
+							</div>
+						)}
+						{response.error !== undefined && (
+							<div className='mt-4 p-4 bg-red-50 text-red-700 rounded-lg'>
+								<p>Noe gikk galt. Vennligst prøv igjen senere.</p>
+							</div>
+						)}
 					</CardContent>
 				</Card>
 
@@ -173,13 +193,13 @@ export default function ContactPage() {
 								<p className='text-muted-foreground'>9:00 - 17:00</p>
 							</div>
 						</div>
-						<div className='flex items-start space-x-3'>
+						{/* <div className='flex items-start space-x-3'>
 							<Clock className='h-5 w-5 text-primary mt-0.5' />
 							<div>
 								<p className='font-medium'>Lørdag / Søndag</p>
 								<p className='text-muted-foreground'>10:00 AM - 2:00 PM EST</p>
 							</div>
-						</div>
+						</div> */}
 						<div className='pt-4 border-t'>
 							<p className='text-sm text-muted-foreground'>
 								For tidssensitive forhold utenfor arbeidstid, send epost til
