@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
             distinctId: data.client_reference_id,
             event: 'purchase',
             properties: {
-                amountPaid,
+                amount: amountPaid,
                 tokensBought,
                 id: data.id,
             },
