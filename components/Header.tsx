@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -17,12 +17,33 @@ const navItems = [
 ];
 
 type Props = {
-    userTokens: number;
+    userTokens?: number;
 };
 
 export default function Header(props: Props) {
 	const [isOpen, setIsOpen] = useState(false);
+    const [userTokens, setUserTokens] = useState(null);
 	const pathname = usePathname();
+
+    // useEffect for getting the userTokens
+    useEffect(() => {
+        // Need to fetch it from /api/tokens
+        fetch('/api/tokens', {
+            method: 'GET',
+            next: { tags: ['tokens'], revalidate: 60 },
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                setUserTokens(data.tokens);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    }, []);
+
 
 	return (
 		<header className='sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60'>
@@ -60,9 +81,9 @@ export default function Header(props: Props) {
 							<UserButton />
 						</SignedIn>
 					</div>
-					<p>{props.userTokens} Tokens</p>
+					<p>{userTokens} Analyser</p>
 					<Link href='/buytokens'>
-						<Button className='hidden md:flex'>Kjøp Tokens</Button>
+						<Button className='hidden md:flex'>Kjøp flere Analyser</Button>
 					</Link>
 					<Sheet open={isOpen} onOpenChange={setIsOpen}>
 						<SheetTrigger asChild>
