@@ -14,6 +14,7 @@ const TokenContext = createContext<TokenContextType | undefined>(undefined);
 export const TokenProvider = ({ children }: { children: React.ReactNode }) => {
 	const { user, isLoaded, isSignedIn } = useUser();
 	const [tokenCount, setTokenCount] = useState<number | null>(null);
+    const [isInitialized, setIsInitialized] = useState(false);
 
 	const fetchTokenCount = async () => {
 		const res = await fetch('/api/tokens');
@@ -26,7 +27,11 @@ export const TokenProvider = ({ children }: { children: React.ReactNode }) => {
             return;
         };
 
-		fetchTokenCount();
+        if (!isInitialized) {
+            fetchTokenCount();
+            setIsInitialized(true);
+        }
+		// fetchTokenCount();
 
 		// Realtime setup
 		const client = new Client()
