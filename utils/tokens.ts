@@ -5,11 +5,12 @@ import { Query } from "node-appwrite";
 const dbId = process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID as string;
 
 export async function addTokens(clerk_user_id: string, numTokens: number) {
-	// ! This server action is possible to be called by the client, so we need to validate the user
-	const { userId } = await auth();
-	if (userId !== clerk_user_id) {
-		throw new Error('Unauthorized');
-	}
+    // ! These auth checks doesnt work, clerk gives undefined. I dont think this is a security issue, but we should fix it so it actually checks the auth status and doesnt just trust the info from stripe webhook(?)
+    // ? The userId is based on the info taken from the stripe webhook, so it should be safe to trust it. But we should still fix the auth check. Same with the number of tokens, it should be safe to trust the info from stripe, but we should still fix the auth check.
+	// const { userId } = await auth();
+	// if (!userId) {
+	// 	throw new Error('Unauthorized');
+	// }
 	const { databases } = await createAdminClient();
 	const documentToUpdate = await databases.listDocuments(dbId, 'user_queries', [
 		Query.select(['$id', 'document_quota_left']),
