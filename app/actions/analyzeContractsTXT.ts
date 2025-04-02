@@ -53,12 +53,15 @@ export async function analyzeTXTContract(formData:FormData) {
 
     // check if the user has any document_quota_left before proceeding, needs to check in the appwrite database based on the users clerk id
     // if the user has no document_quota_left, return an error message to the user and redirect them to the payment page
-    const { databases } = await createAdminClient();
     const user = await currentUser();
     const userId = user?.id;
+    if (!userId) {
+        return { error: 'User ID is missing' };
+    }
+    const { databases } = await createAdminClient();
 
     const getUserQuotaObject = async () => {
-        const userQuota = await databases.listDocuments('legaledge', 'user_queries', [
+        const userQuota = await databases.listDocuments(dbId, collectionId, [
             Query.equal('clerk_user_id', [userId as string]),
         ]);
         return userQuota.documents[0];
@@ -114,10 +117,11 @@ export async function analyzeTXTContract(formData:FormData) {
         const responseObj = messages.data.filter((msg) => msg.role === 'assistant');
 
         // We need to update the user's document_quota_left in the appwrite database as well as increment documents_analysed field 
-        await databases.updateDocument(dbId, collectionId, userQuota.$id, {
+        const updatedUserQueryObj = await databases.updateDocument(dbId, collectionId, userQuota.$id, {
             document_quota_left: userQuota.document_quota_left - TOKENS_PER_QUERY,
             documents_analysed: userQuota.documents_analysed + 1,
         });
+        console.log(`Updated user query object:`, updatedUserQueryObj);
 
         const posthog = PostHogClient();
         posthog.capture({
