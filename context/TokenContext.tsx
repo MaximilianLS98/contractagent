@@ -12,9 +12,9 @@ type TokenContextType = {
 const TokenContext = createContext<TokenContextType | undefined>(undefined);
 
 export const TokenProvider = ({ children }: { children: React.ReactNode }) => {
-    console.log(`TokenProvider`);
 	const { user, isLoaded, isSignedIn } = useUser();
 	const [tokenCount, setTokenCount] = useState<number | null>(null);
+    const [isInitialized, setIsInitialized] = useState(false);
 
 	const fetchTokenCount = async () => {
 		const res = await fetch('/api/tokens');
@@ -24,11 +24,14 @@ export const TokenProvider = ({ children }: { children: React.ReactNode }) => {
 
 	useEffect(() => {
 		if (!isLoaded || !isSignedIn) {
-            console.log(`Isloaded:`, isLoaded, `IsSignedIn:`, isSignedIn);
             return;
         };
 
-		fetchTokenCount();
+        if (!isInitialized) {
+            fetchTokenCount();
+            setIsInitialized(true);
+        }
+		// fetchTokenCount();
 
 		// Realtime setup
 		const client = new Client()
@@ -37,11 +40,9 @@ export const TokenProvider = ({ children }: { children: React.ReactNode }) => {
 
 		// const realtime = new Realtime(client);
         const eventString = `databases.${process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID}.collections.${process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_ID}.documents`;
-        console.log(`Subscribing to eventString:`, eventString);
 		const unsubscribe = client.subscribe(
 			eventString,
 			response => {
-                console.log(`response from subscribe:`, response);
 				const doc = response.payload as { clerk_user_id: string; document_quota_left: number };
 				if (doc.clerk_user_id === user.id) {
 					if (doc.clerk_user_id === user.id) {

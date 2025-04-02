@@ -10,6 +10,6 @@ export const AMOUNT_STEP = 2.0;
 // GENERAL CONFIG
 export const TOKENS_PER_QUERY = 1;
 export const TOKENS_PER_PREMIUM_QUERY = 4;
-export const START_TOKENS = 1;
+export const START_TOKENS = 2;
 export const NOKPERTOKEN = 2;
 

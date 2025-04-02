@@ -3,7 +3,8 @@ import { stripe } from "@/lib/stripe";
 import type { Stripe } from 'stripe';
 import { headers } from "next/headers";
 import { NOKPERTOKEN } from "@/config";
-import { addTokens } from "@/app/actions/tokens";
+// import { addTokens } from "@/app/actions/tokens";
+import { addTokens } from "@/utils/tokens";
 import PostHogClient from "@/posthog";
 
 export async function POST(req: NextRequest) {
