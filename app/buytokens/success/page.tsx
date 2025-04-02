@@ -125,7 +125,7 @@ export default async function ResultPage(props: { searchParams: SearchParams }) 
 				</CardContent>
 				<CardFooter className='flex flex-col gap-4'>
 					<Button asChild className='w-full bg-blue-600 hover:bg-blue-700'>
-						<Link href='/dashboard'>
+						<Link href='/livedemo'>
 							Gå til analyse-siden <ArrowRight className='ml-2 h-4 w-4' />
 						</Link>
 					</Button>
