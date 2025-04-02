@@ -7,6 +7,9 @@ const dbId = process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID as string;
 const collectionId = process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_ID as string;
 
 export async function getTokens(clerk_user_id: string) {
+    if (!clerk_user_id) {
+        return 0;
+    }
     const { databases } = await createAdminClient();
     const result = await databases.listDocuments(dbId, 'user_queries', [
         Query.select(['$id', 'document_quota_left']),

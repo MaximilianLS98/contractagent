@@ -1,10 +1,14 @@
 'use server';
 import { EmailTemplate } from '@/components/email/default-template';
 import { Resend } from 'resend';
+import PostHogClient from '@/posthog';
+import { auth } from '@clerk/nextjs/server';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export const sendEmail = async (prevState: any, formData: any) => {
+    const { userId } = await auth();
+    const posthog = PostHogClient();
     try {
 		const bodyData = Object.fromEntries(formData);
         const { firstName, lastName, email, phone, inqType, message } = bodyData;    
@@ -15,6 +19,16 @@ export const sendEmail = async (prevState: any, formData: any) => {
 			subject: 'Kontaktskjema på LegalEdge',
 			react: await EmailTemplate({ firstName, lastName, email, phone, inqType, message }),
 		});
+
+        posthog.capture({
+            distinctId: userId!,
+            event: 'contact_form_submitted',
+            properties: { 
+                email,
+                inqType,
+                message,
+            }
+        });
 
 		if (error) {
 			console.log(`Error sending email in the api route:`, error);
