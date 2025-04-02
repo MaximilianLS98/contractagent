@@ -16,7 +16,7 @@ const navItems = [
 ];
 
 type Props = {
-	userTokens?: number;
+	userTokens?: number | null;
 };
 
 export default function HeaderClient(props: Props) {
@@ -58,7 +58,10 @@ export default function HeaderClient(props: Props) {
 						<UserButton />
 					</SignedIn>
 				</div>
-				<p>{props.userTokens} Analyser</p>
+                { 
+                    props.userTokens && 
+                    <p>{props.userTokens} Analyser</p>
+                }
 				<Link href='/buytokens'>
 					<Button className='hidden md:flex'>Kjøp flere Analyser</Button>
 				</Link>
