@@ -9,6 +9,8 @@ import { ClerkProvider } from '@clerk/nextjs';
 import { PostHogProvider } from '@/components/PostHogProvider';
 import { Toaster } from 'sonner';
 import { TokenProvider } from '@/context/TokenContext';
+import { nbNO } from '@clerk/localizations';
+import Head from 'next/head';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -20,7 +22,7 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
-		<ClerkProvider>
+		<ClerkProvider localization={nbNO}>
 			<html lang='en'>
 				<body className={inter.className}>
 					<PostHogProvider>
