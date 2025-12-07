@@ -11,7 +11,6 @@ import { Spinner } from './ui/Spinner';
 import { Badge } from './ui/badge';
 import { AlertTriangle, CheckCircle, Info, Upload, FileText } from 'lucide-react';
 
-
 // Define types for response data
 interface ContractAnalysisResult {
 	analysis?: any | null;
@@ -39,10 +38,10 @@ export default function ContractUploader() {
 			alert('Please select a file first.');
 			return;
 		}
-        if (!accepted) {
-            alert('Please accept the disclaimer first.');
-            return;
-        }
+		if (!accepted) {
+			alert('Please accept the disclaimer first.');
+			return;
+		}
 
 		setLoading(true);
 		const formData = new FormData();
@@ -60,20 +59,20 @@ export default function ContractUploader() {
 		// );
 	};
 
-    if (result?.error) {
-        return (
-            <div className='container mx-auto p-4'>
-                <Card className='max-w-lg mx-auto my-8 px-4 py-8'>
-                    <CardHeader>
-                        <h2 className='text-2xl font-bold mb-4'>Error</h2>
-                    </CardHeader>
-                    <CardContent>
-                        <p>{result.error}</p>
-                    </CardContent>
-                </Card>
-            </div>
-        );
-    }
+	if (result?.error) {
+		return (
+			<div className='container mx-auto p-4'>
+				<Card className='max-w-lg mx-auto my-8 px-4 py-8'>
+					<CardHeader>
+						<h2 className='text-2xl font-bold mb-4'>Error</h2>
+					</CardHeader>
+					<CardContent>
+						<p>{result.error}</p>
+					</CardContent>
+				</Card>
+			</div>
+		);
+	}
 
 	return (
 		<div className='container mx-auto p-4'>
@@ -126,7 +125,9 @@ export default function ContractUploader() {
 			</Card>
 			{result && (
 				<div className='mt-4 p-4 bg-gray-100 rounded-lg'>
-					<h3 className='text-xl font-semibold mb-2'>Resultat av analyse: {parsedResult.contract_type}</h3>
+					<h3 className='text-xl font-semibold mb-2'>
+						Resultat av analyse: {parsedResult.contract_type}
+					</h3>
 					{/* <pre>{JSON.stringify(result, null, 4)}</pre> */}
 					{/* <pre>{JSON.stringify(parsedResult, null, 4)}</pre> */}
 					<h2 className='text-lg font-semibold mt-6'>Viktige klausuler</h2>
